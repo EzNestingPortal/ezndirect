@@ -1,0 +1,188 @@
+.PlanContainer {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.Plan {
+  background: #2c2e3d;
+  margin: 0 auto;
+  width: 100%;
+  height: 200px;
+  border-top-left-radius: 180px;
+  border-top-right-radius: 180px;
+  box-shadow: 0 2px 1px #ccc;
+}
+
+.Plan h1,
+h3 {
+  text-align: center;
+  color: white;
+}
+
+.BasicPlanType {
+  margin: 0 auto;
+  background: #393d50;
+  width: 100%;
+  height: 80px;
+}
+
+.BasicPlanType h1 {
+  position: relative;
+  margin: auto;
+  text-align: center;
+  color: #00bcd4;
+  top: 8px;
+}
+
+.BasicPlanType h4 {
+  text-align: center;
+  color: white;
+}
+
+.PlanDetails {
+  margin: 0 auto;
+  background: #2c2e3d;
+  width: 100%;
+}
+
+.PlanDetails p {
+  margin: 0 auto;
+  padding: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: white;
+  list-style-type: none;
+}
+
+.BasicCircle {
+  position: relative;
+  margin: 0 auto;
+  border: 15px solid #1f5a6c;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  top: 10px;
+}
+
+.BasicPricingBuilder {
+  margin: auto;
+  width: 300px;
+  background-color: #1f5a6c;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  box-shadow: 0 2px 1px #ccc;
+  bottom: 0px;
+  padding: 0px;
+}
+
+.BuildControl {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin: 5px 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  color: white;
+  width: 100%;
+}
+
+.ButtonPanel {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin: 5px 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  color: white;
+  width: 100%;
+}
+
+.BasicCollapsibleHeader {
+  display: block;
+  background-color: #00bcd4;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 2px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .Plan {
+    width: 50%;
+    height: 140px;
+  }
+  .Plan h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .Plan h3 {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  .PlanType {
+    width: 50%;
+    height: 60px;
+  }
+  .PlanType h1 {
+    font-size: 1rem;
+    font-weight: bold;
+    top: 8px;
+  }
+  .PlanType h4 {
+    font-size: 0.8rem;
+  }
+  .PlanDetails {
+    width: 50%;
+  }
+  .PlanDetails p {
+    font-size: 0.7rem;
+  }
+  .Circle {
+    position: relative;
+    margin: 0 auto;
+    border: 10px solid #1f5a6c;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    top: 10px;
+  }
+
+  .PricingBuilder {
+    width: 175px;
+  }
+  .BuildControl {
+    display: flex;
+    flex-flow: column;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 0.7rem;
+    color: white;
+    width: 100%;
+  }
+  .ButtonPanel {
+    display: inline;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
