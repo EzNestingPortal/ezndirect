@@ -1,17 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { ICrudGetAction, ICrudDeleteAction } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import { ICrudGetAction, ICrudDeleteAction } from "react-jhipster";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { IUser } from 'app/shared/model/user.model';
-import { getUser, deleteUser } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import { IUser } from "app/shared/model/user.model";
+import {
+  getUser,
+  deleteUser
+} from "app/modules/administration/user-management/user-management.reducer";
+import { IRootState } from "app/shared/reducers";
 
-export interface IUserManagementDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementDeleteDialogProps
+  extends StateProps,
+    DispatchProps,
+    RouteComponentProps<{ login: string }> {}
 
-export class UserManagementDeleteDialog extends React.Component<IUserManagementDeleteDialogProps> {
+export class UserManagementDeleteDialog extends React.Component<
+  IUserManagementDeleteDialogProps
+> {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
   }
@@ -30,7 +38,9 @@ export class UserManagementDeleteDialog extends React.Component<IUserManagementD
     const { user } = this.props;
     return (
       <Modal isOpen toggle={this.handleClose}>
-        <ModalHeader toggle={this.handleClose}>Confirm delete operation</ModalHeader>
+        <ModalHeader toggle={this.handleClose}>
+          Confirm delete operation
+        </ModalHeader>
         <ModalBody>Are you sure you want to delete this User?</ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={this.handleClose}>

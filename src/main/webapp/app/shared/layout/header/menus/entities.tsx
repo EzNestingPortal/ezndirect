@@ -1,9 +1,9 @@
-import React from 'react';
-import { DropdownItem } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { DropdownItem } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { NavLink as Link } from 'react-router-dom';
-import { NavDropdown } from '../header-components';
+import { NavLink as Link } from "react-router-dom";
+import { NavDropdown } from "app/shared/layout/header/header-components";
 
 export const EntitiesMenu = props => (
   // tslint:disable-next-line:jsx-self-close

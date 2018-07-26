@@ -1,18 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Badge } from 'reactstrap';
-import { ICrudGetAction, TextFormat } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { connect } from "react-redux";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { Button, Row, Badge } from "reactstrap";
+import { ICrudGetAction, TextFormat } from "react-jhipster";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { APP_DATE_FORMAT } from 'app/config/constants';
-import { IUser } from 'app/shared/model/user.model';
-import { getUser } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import { APP_DATE_FORMAT } from "app/config/constants";
+import { IUser } from "app/shared/model/user.model";
+import { getUser } from "app/modules/administration/user-management/user-management.reducer";
+import { IRootState } from "app/shared/reducers";
 
-export interface IUserManagementDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementDetailProps
+  extends StateProps,
+    DispatchProps,
+    RouteComponentProps<{ login: string }> {}
 
-export class UserManagementDetail extends React.Component<IUserManagementDetailProps> {
+export class UserManagementDetail extends React.Component<
+  IUserManagementDetailProps
+> {
   componentDidMount() {
     this.props.getUser(this.props.match.params.login);
   }
@@ -29,7 +34,11 @@ export class UserManagementDetail extends React.Component<IUserManagementDetailP
             <dt>Login</dt>
             <dd>
               <span>{user.login}</span>&nbsp;
-              {user.activated ? <Badge color="success">Activated</Badge> : <Badge color="danger">Deactivated</Badge>}
+              {user.activated ? (
+                <Badge color="success">Activated</Badge>
+              ) : (
+                <Badge color="danger">Deactivated</Badge>
+              )}
             </dd>
             <dt>First Name</dt>
             <dd>{user.firstName}</dd>
@@ -41,13 +50,23 @@ export class UserManagementDetail extends React.Component<IUserManagementDetailP
             <dd>{user.createdBy}</dd>
             <dt>Created Date</dt>
             <dd>
-              <TextFormat value={user.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+              <TextFormat
+                value={user.createdDate}
+                type="date"
+                format={APP_DATE_FORMAT}
+                blankOnInvalid
+              />
             </dd>
             <dt>Last Modified By</dt>
             <dd>{user.lastModifiedBy}</dd>
             <dt>Last Modified Date</dt>
             <dd>
-              <TextFormat value={user.lastModifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+              <TextFormat
+                value={user.lastModifiedDate}
+                type="date"
+                format={APP_DATE_FORMAT}
+                blankOnInvalid
+              />
             </dd>
             <dt>Profiles</dt>
             <dd>
@@ -64,7 +83,8 @@ export class UserManagementDetail extends React.Component<IUserManagementDetailP
           </dl>
         </Row>
         <Button tag={Link} to="/admin/user-management" replace color="info">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{" "}
+          <span className="d-none d-md-inline">Back</span>
         </Button>
       </div>
     );

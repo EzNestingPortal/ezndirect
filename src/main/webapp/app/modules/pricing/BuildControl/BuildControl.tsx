@@ -4,7 +4,7 @@ import "./BuildControl.scss";
 
 const buildcontrol = props => {
   let inputElement = null;
-  const inputClasses = ["InputElement"];
+  const inputClasses = ["SelectElement"];
 
   inputElement = (
     <select

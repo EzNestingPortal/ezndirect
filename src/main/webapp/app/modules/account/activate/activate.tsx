@@ -1,10 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Row, Col, Alert } from 'reactstrap';
+import React from "react";
+import { connect } from "react-redux";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { Row, Col, Alert } from "reactstrap";
 
-import { IRootState } from 'app/shared/reducers';
-import { activateAction, reset } from './activate.reducer';
+import { IRootState } from "app/shared/reducers";
+import {
+  activateAction,
+  reset
+} from "app/modules/account/activate/activate.reducer";
 
 const successAlert = (
   <Alert color="success">
@@ -17,11 +20,15 @@ const successAlert = (
 
 const failureAlert = (
   <Alert color="danger">
-    <strong>Your user could not be activated.</strong> Please use the registration form to sign up.
+    <strong>Your user could not be activated.</strong> Please use the
+    registration form to sign up.
   </Alert>
 );
 
-export interface IActivateProps extends StateProps, DispatchProps, RouteComponentProps<{ key: any }> {}
+export interface IActivateProps
+  extends StateProps,
+    DispatchProps,
+    RouteComponentProps<{ key: any }> {}
 
 export class ActivatePage extends React.Component<IActivateProps> {
   componentWillUnmount() {

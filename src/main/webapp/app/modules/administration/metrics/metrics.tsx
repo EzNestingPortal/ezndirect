@@ -1,13 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Table, Progress, Col, Row, Button } from 'reactstrap';
-import { TextFormat } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { connect } from "react-redux";
+import { Table, Progress, Col, Row, Button } from "reactstrap";
+import { TextFormat } from "react-jhipster";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { APP_WHOLE_NUMBER_FORMAT, APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT } from 'app/config/constants';
-import { systemMetrics, systemThreadDump } from '../administration.reducer';
-import MetricsModal from './metrics-modal';
-import { IRootState } from 'app/shared/reducers';
+import {
+  APP_WHOLE_NUMBER_FORMAT,
+  APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT
+} from "app/config/constants";
+import {
+  systemMetrics,
+  systemThreadDump
+} from "app/modules/administration/administration.reducer";
+import MetricsModal from "app/modules/administration/metrics/metrics-modal";
+import { IRootState } from "app/shared/reducers";
 
 export interface IMetricsPageProps extends StateProps, DispatchProps {}
 
@@ -15,7 +21,10 @@ export interface IMetricsPageState {
   showModal: boolean;
 }
 
-export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPageState> {
+export class MetricsPage extends React.Component<
+  IMetricsPageProps,
+  IMetricsPageState
+> {
   state: IMetricsPageState = {
     showModal: false
   };
@@ -52,12 +61,12 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
     };
     if (!this.props.isFetching && metrics && metrics.timers) {
       Object.keys(metrics.timers).forEach((key, indexNm) => {
-        if (key.indexOf('web.rest') !== -1 || key.indexOf('service') !== -1) {
+        if (key.indexOf("web.rest") !== -1 || key.indexOf("service") !== -1) {
           stat.servicesStats[key] = metrics.timers[key];
         }
-        if (key.indexOf('net.sf.ehcache.Cache') !== -1) {
+        if (key.indexOf("net.sf.ehcache.Cache") !== -1) {
           // remove gets or puts
-          const index = key.lastIndexOf('.');
+          const index = key.lastIndexOf(".");
           const newKey = key.substr(0, index);
           // Keep the name of the domain
           stat.cachesStats[newKey] = {
@@ -80,7 +89,13 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
       </Row>
     ) : null;
 
-  renderModal = () => <MetricsModal handleClose={this.handleClose} showModal={this.state.showModal} threadDump={this.props.threadDump} />;
+  renderModal = () => (
+    <MetricsModal
+      handleClose={this.handleClose}
+      showModal={this.state.showModal}
+      threadDump={this.props.threadDump}
+    />
+  );
 
   renderGauges = metrics => (
     <Row>
@@ -91,21 +106,32 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             <b>Memory</b>
             <p>
               <span>Total Memory</span> (
-              <TextFormat value={metrics.gauges['jvm.memory.total.used'].value / 1048576} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
-              M /{' '}
-              <TextFormat value={metrics.gauges['jvm.memory.total.max'].value / 1048576} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+              <TextFormat
+                value={metrics.gauges["jvm.memory.total.used"].value / 1048576}
+                type="number"
+                format={APP_WHOLE_NUMBER_FORMAT}
+              />
+              M /{" "}
+              <TextFormat
+                value={metrics.gauges["jvm.memory.total.max"].value / 1048576}
+                type="number"
+                format={APP_WHOLE_NUMBER_FORMAT}
+              />
               M)
             </p>
             <Progress
               animated
-              value={metrics.gauges['jvm.memory.total.used'].value}
+              value={metrics.gauges["jvm.memory.total.used"].value}
               min="0"
-              max={metrics.gauges['jvm.memory.total.max'].value}
+              max={metrics.gauges["jvm.memory.total.max"].value}
               color="success"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.memory.total.used'].value * 100) / metrics.gauges['jvm.memory.total.max'].value}
+                  value={
+                    (metrics.gauges["jvm.memory.total.used"].value * 100) /
+                    metrics.gauges["jvm.memory.total.max"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -114,21 +140,32 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Progress>
             <p>
               <span>Heap Memory</span> (
-              <TextFormat value={metrics.gauges['jvm.memory.heap.used'].value / 1048576} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
-              M /{' '}
-              <TextFormat value={metrics.gauges['jvm.memory.heap.max'].value / 1048576} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+              <TextFormat
+                value={metrics.gauges["jvm.memory.heap.used"].value / 1048576}
+                type="number"
+                format={APP_WHOLE_NUMBER_FORMAT}
+              />
+              M /{" "}
+              <TextFormat
+                value={metrics.gauges["jvm.memory.heap.max"].value / 1048576}
+                type="number"
+                format={APP_WHOLE_NUMBER_FORMAT}
+              />
               M)
             </p>
             <Progress
               animated
               min="0"
-              max={metrics.gauges['jvm.memory.heap.max'].value}
-              value={metrics.gauges['jvm.memory.heap.used'].value}
+              max={metrics.gauges["jvm.memory.heap.max"].value}
+              value={metrics.gauges["jvm.memory.heap.used"].value}
               color="success"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.memory.heap.used'].value * 100) / metrics.gauges['jvm.memory.heap.max'].value}
+                  value={
+                    (metrics.gauges["jvm.memory.heap.used"].value * 100) /
+                    metrics.gauges["jvm.memory.heap.max"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -139,13 +176,18 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             <p>
               <span>Non-Heap Memory</span> (
               <TextFormat
-                value={metrics.gauges['jvm.memory.non-heap.used'].value / 1048576}
+                value={
+                  metrics.gauges["jvm.memory.non-heap.used"].value / 1048576
+                }
                 type="number"
                 format={APP_WHOLE_NUMBER_FORMAT}
               />
-              M /{' '}
+              M /{" "}
               <TextFormat
-                value={metrics.gauges['jvm.memory.non-heap.committed'].value / 1048576}
+                value={
+                  metrics.gauges["jvm.memory.non-heap.committed"].value /
+                  1048576
+                }
                 type="number"
                 format={APP_WHOLE_NUMBER_FORMAT}
               />
@@ -154,13 +196,16 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             <Progress
               animated
               min="0"
-              max={metrics.gauges['jvm.memory.non-heap.committed'].value}
-              value={metrics.gauges['jvm.memory.non-heap.used'].value}
+              max={metrics.gauges["jvm.memory.non-heap.committed"].value}
+              value={metrics.gauges["jvm.memory.non-heap.used"].value}
               color="success"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.memory.non-heap.used'].value * 100) / metrics.gauges['jvm.memory.non-heap.committed'].value}
+                  value={
+                    (metrics.gauges["jvm.memory.non-heap.used"].value * 100) /
+                    metrics.gauges["jvm.memory.non-heap.committed"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -169,23 +214,27 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Progress>
           </Col>
           <Col md="4">
-            <b>Threads</b> (Total: {metrics.gauges['jvm.threads.count'].value}){' '}
+            <b>Threads</b> (Total: {metrics.gauges["jvm.threads.count"].value}){" "}
             <Button color="link" className="hand" onClick={this.getThreadDump}>
               <FontAwesomeIcon icon="eye" />
             </Button>
             <p>
-              <span>Runnable</span> {metrics.gauges['jvm.threads.runnable.count'].value}
+              <span>Runnable</span>{" "}
+              {metrics.gauges["jvm.threads.runnable.count"].value}
             </p>
             <Progress
               animated
               min="0"
-              value={metrics.gauges['jvm.threads.runnable.count'].value}
-              max={metrics.gauges['jvm.threads.count'].value}
+              value={metrics.gauges["jvm.threads.runnable.count"].value}
+              max={metrics.gauges["jvm.threads.count"].value}
               color="success"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.threads.runnable.count'].value * 100) / metrics.gauges['jvm.threads.count'].value}
+                  value={
+                    (metrics.gauges["jvm.threads.runnable.count"].value * 100) /
+                    metrics.gauges["jvm.threads.count"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -193,18 +242,24 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
               </span>
             </Progress>
             <p>
-              <span>Timed Waiting</span> ({metrics.gauges['jvm.threads.timed_waiting.count'].value})
+              <span>Timed Waiting</span> ({
+                metrics.gauges["jvm.threads.timed_waiting.count"].value
+              })
             </p>
             <Progress
               animated
               min="0"
-              value={metrics.gauges['jvm.threads.timed_waiting.count'].value}
-              max={metrics.gauges['jvm.threads.count'].value}
+              value={metrics.gauges["jvm.threads.timed_waiting.count"].value}
+              max={metrics.gauges["jvm.threads.count"].value}
               color="warning"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.threads.timed_waiting.count'].value * 100) / metrics.gauges['jvm.threads.count'].value}
+                  value={
+                    (metrics.gauges["jvm.threads.timed_waiting.count"].value *
+                      100) /
+                    metrics.gauges["jvm.threads.count"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -212,18 +267,23 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
               </span>
             </Progress>
             <p>
-              <span>Waiting</span> ({metrics.gauges['jvm.threads.waiting.count'].value})
+              <span>Waiting</span> ({
+                metrics.gauges["jvm.threads.waiting.count"].value
+              })
             </p>
             <Progress
               animated
               min="0"
-              value={metrics.gauges['jvm.threads.waiting.count'].value}
-              max={metrics.gauges['jvm.threads.count'].value}
+              value={metrics.gauges["jvm.threads.waiting.count"].value}
+              max={metrics.gauges["jvm.threads.count"].value}
               color="warning"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.threads.waiting.count'].value * 100) / metrics.gauges['jvm.threads.count'].value}
+                  value={
+                    (metrics.gauges["jvm.threads.waiting.count"].value * 100) /
+                    metrics.gauges["jvm.threads.count"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -231,18 +291,23 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
               </span>
             </Progress>
             <p>
-              <span>Blocked</span> ({metrics.gauges['jvm.threads.blocked.count'].value})
+              <span>Blocked</span> ({
+                metrics.gauges["jvm.threads.blocked.count"].value
+              })
             </p>
             <Progress
               animated
               min="0"
-              value={metrics.gauges['jvm.threads.blocked.count'].value}
-              max={metrics.gauges['jvm.threads.count'].value}
+              value={metrics.gauges["jvm.threads.blocked.count"].value}
+              max={metrics.gauges["jvm.threads.count"].value}
               color="success"
             >
               <span>
                 <TextFormat
-                  value={(metrics.gauges['jvm.threads.blocked.count'].value * 100) / metrics.gauges['jvm.threads.count'].value}
+                  value={
+                    (metrics.gauges["jvm.threads.blocked.count"].value * 100) /
+                    metrics.gauges["jvm.threads.count"].value
+                  }
                   type="number"
                   format={APP_WHOLE_NUMBER_FORMAT}
                 />
@@ -252,10 +317,26 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
           </Col>
           <Col md="4">
             <b>Garbage collections</b>
-            {this.gaugeRow(metrics, 'Mark Sweep count', 'jvm.garbage.PS-MarkSweep.count')}
-            {this.gaugeRow(metrics, 'Mark Sweep time', 'jvm.garbage.PS-MarkSweep.time')}
-            {this.gaugeRow(metrics, 'Scavenge count', 'jvm.garbage.PS-Scavenge.count')}
-            {this.gaugeRow(metrics, 'Scavenge time', 'jvm.garbage.PS-Scavenge.time')}
+            {this.gaugeRow(
+              metrics,
+              "Mark Sweep count",
+              "jvm.garbage.PS-MarkSweep.count"
+            )}
+            {this.gaugeRow(
+              metrics,
+              "Mark Sweep time",
+              "jvm.garbage.PS-MarkSweep.time"
+            )}
+            {this.gaugeRow(
+              metrics,
+              "Scavenge count",
+              "jvm.garbage.PS-Scavenge.count"
+            )}
+            {this.gaugeRow(
+              metrics,
+              "Scavenge time",
+              "jvm.garbage.PS-Scavenge.time"
+            )}
           </Col>
         </Row>
       </Col>
@@ -270,30 +351,42 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
       <div>
         <h2 className="metrics-page-heading">Application Metrics</h2>
         <p>
-          <Button onClick={this.getMetrics} color={isFetching ? 'btn btn-danger' : 'btn btn-primary'} disabled={isFetching}>
+          <Button
+            onClick={this.getMetrics}
+            color={isFetching ? "btn btn-danger" : "btn btn-primary"}
+            disabled={isFetching}
+          >
             <FontAwesomeIcon icon="sync" />&nbsp; Refresh
           </Button>
         </p>
         <hr />
-        {metrics.gauges ? this.renderGauges(metrics) : ''}
+        {metrics.gauges ? this.renderGauges(metrics) : ""}
 
         {metrics.meters && metrics.timers ? (
           <Row>
             <Col sm="12">
               <h3>HTTP requests (events per second)</h3>
               <p>
-                <span>Active requests:</span>{' '}
+                <span>Active requests:</span>{" "}
                 <b>
                   <TextFormat
-                    value={metrics.counters['com.codahale.metrics.servlet.InstrumentedFilter.activeRequests'].count}
+                    value={
+                      metrics.counters[
+                        "com.codahale.metrics.servlet.InstrumentedFilter.activeRequests"
+                      ].count
+                    }
                     type="number"
                     format={APP_WHOLE_NUMBER_FORMAT}
                   />
-                </b>{' '}
-                - <span>Total requests:</span>{' '}
+                </b>{" "}
+                - <span>Total requests:</span>{" "}
                 <b>
                   <TextFormat
-                    value={metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count}
+                    value={
+                      metrics.timers[
+                        "com.codahale.metrics.servlet.InstrumentedFilter.requests"
+                      ].count
+                    }
                     type="number"
                     format={APP_WHOLE_NUMBER_FORMAT}
                   />
@@ -322,36 +415,60 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td>
                       <Progress
                         min="0"
-                        max={metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count}
-                        value={metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].count}
+                        max={
+                          metrics.timers[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.requests"
+                          ].count
+                        }
+                        value={
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"
+                          ].count
+                        }
                         color="success"
                         animated
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].mean_rate)}
+                        value={this.filterNaN(
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"
+                          ].mean_rate
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m1_rate)}
+                        value={this.filterNaN(
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"
+                          ].m1_rate
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m5_rate)}
+                        value={this.filterNaN(
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"
+                          ].m5_rate
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m15_rate)}
+                        value={this.filterNaN(
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"
+                          ].m15_rate
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
@@ -362,8 +479,16 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td>
                       <Progress
                         min="0"
-                        max={metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count}
-                        value={metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].count}
+                        max={
+                          metrics.timers[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.requests"
+                          ].count
+                        }
+                        value={
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"
+                          ].count
+                        }
                         color="success"
                         animated
                       />
@@ -371,7 +496,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].mean_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"
+                          ].mean_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -380,7 +507,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m1_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"
+                          ].m1_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -389,7 +518,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m5_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"
+                          ].m5_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -398,7 +529,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m15_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"
+                          ].m15_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -410,8 +543,16 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td>
                       <Progress
                         min="0"
-                        max={metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count}
-                        value={metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].count}
+                        max={
+                          metrics.timers[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.requests"
+                          ].count
+                        }
+                        value={
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"
+                          ].count
+                        }
                         color="success"
                         animated
                       />
@@ -419,7 +560,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].mean_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"
+                          ].mean_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -428,7 +571,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m1_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"
+                          ].m1_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -437,7 +582,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m5_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"
+                          ].m5_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -446,7 +593,9 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td className="text-right">
                       <TextFormat
                         value={this.filterNaN(
-                          metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m15_rate
+                          metrics.meters[
+                            "com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"
+                          ].m15_rate
                         )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
@@ -458,7 +607,7 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Col>
           </Row>
         ) : (
-          ''
+          ""
         )}
         {servicesStats ? (
           <Row>
@@ -485,25 +634,53 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td>{key}</td>
                     <td>{servicesStats[key].count}</td>
                     <td>
-                      <TextFormat value={servicesStats[key].mean * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].mean * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].min * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].min * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].p50 * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].p50 * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].p75 * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].p75 * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].p95 * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].p95 * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].p99 * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].p99 * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                     <td>
-                      <TextFormat value={servicesStats[key].max * 1024} type="number" format={APP_WHOLE_NUMBER_FORMAT} />
+                      <TextFormat
+                        value={servicesStats[key].max * 1024}
+                        type="number"
+                        format={APP_WHOLE_NUMBER_FORMAT}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -511,7 +688,7 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Table>
           </Row>
         ) : (
-          ''
+          ""
         )}
 
         {cachesStats ? (
@@ -542,12 +719,12 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Col>
           </Row>
         ) : (
-          ''
+          ""
         )}
 
         {metrics.gauges &&
-        metrics.gauges['HikariPool-1.pool.TotalConnections'] &&
-        metrics.gauges['HikariPool-1.pool.TotalConnections'].value > 0 ? (
+        metrics.gauges["HikariPool-1.pool.TotalConnections"] &&
+        metrics.gauges["HikariPool-1.pool.TotalConnections"].value > 0 ? (
           <Row>
             <Col sm="12">
               <h3>DataSource statistics (time in millisecond)</h3>
@@ -556,8 +733,15 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                   <tr>
                     <th>
                       <span>Usage</span>
-                      ({metrics.gauges['HikariPool-1.pool.ActiveConnections'].value} /{' '}
-                      {metrics.gauges['HikariPool-1.pool.TotalConnections'].value})
+                      ({
+                        metrics.gauges["HikariPool-1.pool.ActiveConnections"]
+                          .value
+                      }{" "}
+                      /{" "}
+                      {
+                        metrics.gauges["HikariPool-1.pool.TotalConnections"]
+                          .value
+                      })
                     </th>
                     <th className="text-right">Count</th>
                     <th className="text-right">Mean</th>
@@ -574,14 +758,25 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                     <td>
                       <Progress
                         min="0"
-                        max={metrics.gauges['HikariPool-1.pool.TotalConnections'].value}
-                        value={metrics.gauges['HikariPool-1.pool.ActiveConnections'].value}
+                        max={
+                          metrics.gauges["HikariPool-1.pool.TotalConnections"]
+                            .value
+                        }
+                        value={
+                          metrics.gauges["HikariPool-1.pool.ActiveConnections"]
+                            .value
+                        }
                       >
                         <span>
                           <TextFormat
                             value={
-                              (metrics.gauges['HikariPool-1.pool.ActiveConnections'].value * 100) /
-                              metrics.gauges['HikariPool-1.pool.TotalConnections'].value
+                              (metrics.gauges[
+                                "HikariPool-1.pool.ActiveConnections"
+                              ].value *
+                                100) /
+                              metrics.gauges[
+                                "HikariPool-1.pool.TotalConnections"
+                              ].value
                             }
                             type="number"
                             format={APP_WHOLE_NUMBER_FORMAT}
@@ -590,52 +785,68 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
                         </span>
                       </Progress>
                     </td>
-                    <td className="text-right">{metrics.histograms['HikariPool-1.pool.Usage'].count}</td>
+                    <td className="text-right">
+                      {metrics.histograms["HikariPool-1.pool.Usage"].count}
+                    </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].mean)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].mean
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].min)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].min
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p50)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].p50
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p75)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].p75
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p95)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].p95
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p99)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].p99
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
                     </td>
                     <td className="text-right">
                       <TextFormat
-                        value={this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].max)}
+                        value={this.filterNaN(
+                          metrics.histograms["HikariPool-1.pool.Usage"].max
+                        )}
                         type="number"
                         format={APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT}
                       />
@@ -646,7 +857,7 @@ export class MetricsPage extends React.Component<IMetricsPageProps, IMetricsPage
             </Col>
           </Row>
         ) : (
-          ''
+          ""
         )}
 
         {this.renderModal()}

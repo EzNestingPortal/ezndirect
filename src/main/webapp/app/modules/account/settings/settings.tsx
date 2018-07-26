@@ -1,12 +1,15 @@
-import React from 'react';
-import { Button, Col, Alert, Row } from 'reactstrap';
-import { connect } from 'react-redux';
+import React from "react";
+import { Button, Col, Alert, Row } from "reactstrap";
+import { connect } from "react-redux";
 
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { AvForm, AvField } from "availity-reactstrap-validation";
 
-import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
-import { saveAccountSettings, reset } from './settings.reducer';
+import { IRootState } from "app/shared/reducers";
+import { getSession } from "app/shared/reducers/authentication";
+import {
+  saveAccountSettings,
+  reset
+} from "app/modules/account/settings/settings.reducer";
 
 export interface IUserSettingsProps extends StateProps, DispatchProps {}
 
@@ -14,7 +17,10 @@ export interface IUserSettingsState {
   account: any;
 }
 
-export class SettingsPage extends React.Component<IUserSettingsProps, IUserSettingsState> {
+export class SettingsPage extends React.Component<
+  IUserSettingsProps,
+  IUserSettingsState
+> {
   componentDidMount() {
     this.props.getSession();
   }
@@ -50,9 +56,20 @@ export class SettingsPage extends React.Component<IUserSettingsProps, IUserSetti
                 id="firstName"
                 placeholder="Your first name"
                 validate={{
-                  required: { value: true, errorMessage: 'Your first name is required.' },
-                  minLength: { value: 1, errorMessage: 'Your first name is required to be at least 1 character' },
-                  maxLength: { value: 50, errorMessage: 'Your first name cannot be longer than 50 characters' }
+                  required: {
+                    value: true,
+                    errorMessage: "Your first name is required."
+                  },
+                  minLength: {
+                    value: 1,
+                    errorMessage:
+                      "Your first name is required to be at least 1 character"
+                  },
+                  maxLength: {
+                    value: 50,
+                    errorMessage:
+                      "Your first name cannot be longer than 50 characters"
+                  }
                 }}
                 value={account.firstName}
               />
@@ -64,9 +81,20 @@ export class SettingsPage extends React.Component<IUserSettingsProps, IUserSetti
                 id="lastName"
                 placeholder="Your last name"
                 validate={{
-                  required: { value: true, errorMessage: 'Your last name is required.' },
-                  minLength: { value: 1, errorMessage: 'Your last name is required to be at least 1 character' },
-                  maxLength: { value: 50, errorMessage: 'Your last name cannot be longer than 50 characters' }
+                  required: {
+                    value: true,
+                    errorMessage: "Your last name is required."
+                  },
+                  minLength: {
+                    value: 1,
+                    errorMessage:
+                      "Your last name is required to be at least 1 character"
+                  },
+                  maxLength: {
+                    value: 50,
+                    errorMessage:
+                      "Your last name cannot be longer than 50 characters"
+                  }
                 }}
                 value={account.lastName}
               />
@@ -77,9 +105,20 @@ export class SettingsPage extends React.Component<IUserSettingsProps, IUserSetti
                 placeholder="Your email"
                 type="email"
                 validate={{
-                  required: { value: true, errorMessage: 'Your email is required.' },
-                  minLength: { value: 5, errorMessage: 'Your email is required to be at least 5 characters.' },
-                  maxLength: { value: 254, errorMessage: 'Your email cannot be longer than 50 characters.' }
+                  required: {
+                    value: true,
+                    errorMessage: "Your email is required."
+                  },
+                  minLength: {
+                    value: 5,
+                    errorMessage:
+                      "Your email is required to be at least 5 characters."
+                  },
+                  maxLength: {
+                    value: 254,
+                    errorMessage:
+                      "Your email cannot be longer than 50 characters."
+                  }
                 }}
                 value={account.email}
               />

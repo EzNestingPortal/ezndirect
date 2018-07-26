@@ -40,9 +40,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/ezncust
-        username: ezncust
-        password:
+        url: jdbc:postgresql://eznestingdb.cawtcyvxcnqd.us-east-1.rds.amazonaws.com:5432/ezncust
+        username: eznuser
+        password: eznesting123
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

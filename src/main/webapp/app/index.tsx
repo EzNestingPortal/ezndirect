@@ -1,27 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { AppContainer } from 'react-hot-loader';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { bindActionCreators } from "redux";
+import { AppContainer } from "react-hot-loader";
 
-import DevTools from './config/devtools';
-import initStore from './config/store';
-import setupAxiosInterceptors from './config/axios-interceptor';
-import { clearAuthentication } from './shared/reducers/authentication';
-import ErrorBoundary from './shared/error/error-boundary';
-import AppComponent from './app';
-import { loadIcons } from './config/icon-loader';
+import DevTools from "app/config/devtools";
+import initStore from "app/config/store";
+import setupAxiosInterceptors from "app/config/axios-interceptor";
+import { clearAuthentication } from "app/shared/reducers/authentication";
+import ErrorBoundary from "app/shared/error/error-boundary";
+import AppComponent from "app/app";
+import { loadIcons } from "app/config/icon-loader";
 
-const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
+const devTools = process.env.NODE_ENV === "development" ? <DevTools /> : null;
 
 const store = initStore();
 
 const actions = bindActionCreators({ clearAuthentication }, store.dispatch);
-setupAxiosInterceptors(() => actions.clearAuthentication('login.error.unauthorized'));
+setupAxiosInterceptors(() =>
+  actions.clearAuthentication("login.error.unauthorized")
+);
 
 loadIcons();
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById("root");
 
 const render = Component =>
   ReactDOM.render(

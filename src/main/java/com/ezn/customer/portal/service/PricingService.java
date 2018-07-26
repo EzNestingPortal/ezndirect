@@ -345,6 +345,10 @@ public class PricingService {
     }
 
     private String initializePlan(PropertyMetaDataDTO propertyMetaDataDTO) {
+        log.debug("Lot Size:: " + propertyMetaDataDTO.getLotSize());
+        log.debug("Floor Size:: " + propertyMetaDataDTO.getFloorSize());
+        log.debug("Floors :: " + propertyMetaDataDTO.getFloors());
+
 
         int size = propertyMetaDataDTO.getLotSize() - propertyMetaDataDTO.getFloorSize();
         if(propertyMetaDataDTO.getFloors()>1){

@@ -1,24 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Alert, Col, Row, Button } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import React from "react";
+import { connect } from "react-redux";
+import { Alert, Col, Row, Button } from "reactstrap";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from "react-router-dom";
 
-import { IRootState } from 'app/shared/reducers';
-import { handlePasswordResetFinish, reset } from '../password-reset.reducer';
-import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
+import { IRootState } from "app/shared/reducers";
+import {
+  handlePasswordResetFinish,
+  reset
+} from "app/modules/account/password-reset/password-reset.reducer";
+import PasswordStrengthBar from "app/shared/layout/password/password-strength-bar";
 
-export interface IPasswordResetFinishProps extends DispatchProps, RouteComponentProps<{ key: string }> {}
+export interface IPasswordResetFinishProps
+  extends DispatchProps,
+    RouteComponentProps<{ key: string }> {}
 
 export interface IPasswordResetFinishState {
   password: string;
   key: string;
 }
 
-export class PasswordResetFinishPage extends React.Component<IPasswordResetFinishProps, IPasswordResetFinishState> {
+export class PasswordResetFinishPage extends React.Component<
+  IPasswordResetFinishProps,
+  IPasswordResetFinishState
+> {
   state: IPasswordResetFinishState = {
-    password: '',
+    password: "",
     key: this.props.match.params.key
   };
 
@@ -40,12 +48,22 @@ export class PasswordResetFinishPage extends React.Component<IPasswordResetFinis
         <AvField
           name="newPassword"
           label="New password"
-          placeholder={'New password'}
+          placeholder={"New password"}
           type="password"
           validate={{
-            required: { value: true, errorMessage: 'Your password is required.' },
-            minLength: { value: 4, errorMessage: 'Your password is required to be at least 4 characters.' },
-            maxLength: { value: 50, errorMessage: 'Your password cannot be longer than 50 characters.' }
+            required: {
+              value: true,
+              errorMessage: "Your password is required."
+            },
+            minLength: {
+              value: 4,
+              errorMessage:
+                "Your password is required to be at least 4 characters."
+            },
+            maxLength: {
+              value: 50,
+              errorMessage: "Your password cannot be longer than 50 characters."
+            }
           }}
           onChange={this.updatePassword}
         />
@@ -56,10 +74,24 @@ export class PasswordResetFinishPage extends React.Component<IPasswordResetFinis
           placeholder="Confirm the new password"
           type="password"
           validate={{
-            required: { value: true, errorMessage: 'Your confirmation password is required.' },
-            minLength: { value: 4, errorMessage: 'Your confirmation password is required to be at least 4 characters.' },
-            maxLength: { value: 50, errorMessage: 'Your confirmation password cannot be longer than 50 characters.' },
-            match: { value: 'newPassword', errorMessage: 'The password and its confirmation do not match!' }
+            required: {
+              value: true,
+              errorMessage: "Your confirmation password is required."
+            },
+            minLength: {
+              value: 4,
+              errorMessage:
+                "Your confirmation password is required to be at least 4 characters."
+            },
+            maxLength: {
+              value: 50,
+              errorMessage:
+                "Your confirmation password cannot be longer than 50 characters."
+            },
+            match: {
+              value: "newPassword",
+              errorMessage: "The password and its confirmation do not match!"
+            }
           }}
         />
         <Button color="success" type="submit">

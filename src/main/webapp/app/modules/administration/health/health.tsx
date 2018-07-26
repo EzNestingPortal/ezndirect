@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { Table, Badge, Col, Row, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Table, Badge, Col, Row, Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { IRootState } from 'app/shared/reducers';
-import { systemHealth } from '../administration.reducer';
-import HealthModal from './health-modal';
+import { IRootState } from "app/shared/reducers";
+import { systemHealth } from "app/modules/administration/administration.reducer";
+import HealthModal from "app/modules/administration/health/health-modal";
 
 export interface IHealthPageProps extends StateProps, DispatchProps {}
 
@@ -15,7 +15,10 @@ export interface IHealthPageState {
   showModal: boolean;
 }
 
-export class HealthPage extends React.Component<IHealthPageProps, IHealthPageState> {
+export class HealthPage extends React.Component<
+  IHealthPageProps,
+  IHealthPageState
+> {
   state: IHealthPageState = {
     healthObject: {},
     showModal: false
@@ -49,7 +52,13 @@ export class HealthPage extends React.Component<IHealthPageProps, IHealthPageSta
 
   renderModal = () => {
     const { healthObject } = this.state;
-    return <HealthModal healthObject={healthObject} handleClose={this.handleClose} showModal={this.state.showModal} />;
+    return (
+      <HealthModal
+        healthObject={healthObject}
+        handleClose={this.handleClose}
+        showModal={this.state.showModal}
+      />
+    );
   };
 
   render() {
@@ -59,7 +68,11 @@ export class HealthPage extends React.Component<IHealthPageProps, IHealthPageSta
       <div>
         <h2 className="health-page-heading">Health Checks</h2>
         <p>
-          <Button onClick={this.getSystemHealth} color={isFetching ? 'btn btn-danger' : 'btn btn-primary'} disabled={isFetching}>
+          <Button
+            onClick={this.getSystemHealth}
+            color={isFetching ? "btn btn-danger" : "btn btn-primary"}
+            disabled={isFetching}
+          >
             <FontAwesomeIcon icon="sync" />&nbsp; Refresh
           </Button>
         </p>
@@ -76,15 +89,28 @@ export class HealthPage extends React.Component<IHealthPageProps, IHealthPageSta
               <tbody>
                 {Object.keys(data).map(
                   (configPropKey, configPropIndex) =>
-                    configPropKey !== 'status' ? (
+                    configPropKey !== "status" ? (
                       <tr key={configPropIndex}>
                         <td>{configPropKey}</td>
                         <td>
-                          <Badge color={data[configPropKey].status !== 'UP' ? 'danger' : 'success'}>{data[configPropKey].status}</Badge>
+                          <Badge
+                            color={
+                              data[configPropKey].status !== "UP"
+                                ? "danger"
+                                : "success"
+                            }
+                          >
+                            {data[configPropKey].status}
+                          </Badge>
                         </td>
                         <td>
                           {data[configPropKey].details ? (
-                            <a onClick={this.getSystemHealthInfo(configPropKey, data[configPropKey])}>
+                            <a
+                              onClick={this.getSystemHealthInfo(
+                                configPropKey,
+                                data[configPropKey]
+                              )}
+                            >
                               <FontAwesomeIcon icon="eye" />
                             </a>
                           ) : null}

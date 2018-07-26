@@ -1,44 +1,11 @@
-.PricingContainer {
+.FormContainer {
   margin: 0 auto;
-  width: 100%;
+  width: 400px;
 }
 
-.DesktopOnly {
-  font-weight: bold;
-  text-align: center;
-}
-
-.a {
-  color: #393d50;
-}
-
-.b {
-  color: red;
-}
-
-.c {
-  color: #393d50;
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .DesktopOnly {
-    display: none;
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+.ButtonPanel {
+  margin: 0 auto;
+  width: 400px;
+  display: flex;
+  flex-flow: column;
 }

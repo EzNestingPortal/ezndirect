@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { connect } from 'react-redux';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { Row, Col, Button } from 'reactstrap';
+import { connect } from "react-redux";
+import { AvForm, AvField } from "availity-reactstrap-validation";
+import { Row, Col, Button } from "reactstrap";
 
-import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
-import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
-import { savePassword, reset } from './password.reducer';
+import { IRootState } from "app/shared/reducers";
+import { getSession } from "app/shared/reducers/authentication";
+import PasswordStrengthBar from "app/shared/layout/password/password-strength-bar";
+import {
+  savePassword,
+  reset
+} from "app/modules/account/password/password.reducer";
 
 export interface IUserPasswordProps extends StateProps, DispatchProps {}
 
@@ -15,9 +18,12 @@ export interface IUserPasswordState {
   password: string;
 }
 
-export class PasswordPage extends React.Component<IUserPasswordProps, IUserPasswordState> {
+export class PasswordPage extends React.Component<
+  IUserPasswordProps,
+  IUserPasswordState
+> {
   state: IUserPasswordState = {
-    password: ''
+    password: ""
   };
 
   componentDidMount() {
@@ -52,7 +58,10 @@ export class PasswordPage extends React.Component<IUserPasswordProps, IUserPassw
                 placeholder="Current password"
                 type="password"
                 validate={{
-                  required: { value: true, errorMessage: 'Your password is required.' }
+                  required: {
+                    value: true,
+                    errorMessage: "Your password is required."
+                  }
                 }}
               />
               <AvField
@@ -61,9 +70,20 @@ export class PasswordPage extends React.Component<IUserPasswordProps, IUserPassw
                 placeholder="New password"
                 type="password"
                 validate={{
-                  required: { value: true, errorMessage: 'Your password is required.' },
-                  minLength: { value: 4, errorMessage: 'Your password is required to be at least 4 characters.' },
-                  maxLength: { value: 50, errorMessage: 'Your password cannot be longer than 50 characters.' }
+                  required: {
+                    value: true,
+                    errorMessage: "Your password is required."
+                  },
+                  minLength: {
+                    value: 4,
+                    errorMessage:
+                      "Your password is required to be at least 4 characters."
+                  },
+                  maxLength: {
+                    value: 50,
+                    errorMessage:
+                      "Your password cannot be longer than 50 characters."
+                  }
                 }}
                 onChange={this.updatePassword}
               />
@@ -76,19 +96,22 @@ export class PasswordPage extends React.Component<IUserPasswordProps, IUserPassw
                 validate={{
                   required: {
                     value: true,
-                    errorMessage: 'Your confirmation password is required.'
+                    errorMessage: "Your confirmation password is required."
                   },
                   minLength: {
                     value: 4,
-                    errorMessage: 'Your confirmation password is required to be at least 4 characters.'
+                    errorMessage:
+                      "Your confirmation password is required to be at least 4 characters."
                   },
                   maxLength: {
                     value: 50,
-                    errorMessage: 'Your confirmation password cannot be longer than 50 characters.'
+                    errorMessage:
+                      "Your confirmation password cannot be longer than 50 characters."
                   },
                   match: {
-                    value: 'newPassword',
-                    errorMessage: 'The password and its confirmation do not match!'
+                    value: "newPassword",
+                    errorMessage:
+                      "The password and its confirmation do not match!"
                   }
                 }}
               />

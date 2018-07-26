@@ -1,29 +1,29 @@
-import React from 'react';
-import { DropdownItem } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink as Link } from 'react-router-dom';
-import { NavDropdown } from '../header-components';
+import React from "react";
+import { DropdownItem } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink as Link } from "react-router-dom";
+import { NavDropdown } from "app/shared/layout/header/header-components";
 
 const adminMenuItems = (
   <>
     <DropdownItem tag={Link} to="/admin/user-management">
-      <FontAwesomeIcon icon="user" />{' '}
+      <FontAwesomeIcon icon="user" />{" "}
     </DropdownItem>
     <DropdownItem tag={Link} to="/admin/metrics">
-      <FontAwesomeIcon icon="tachometer-alt" />{' '}
+      <FontAwesomeIcon icon="tachometer-alt" />{" "}
     </DropdownItem>
     <DropdownItem tag={Link} to="/admin/health">
-      <FontAwesomeIcon icon="heart" />{' '}
+      <FontAwesomeIcon icon="heart" />{" "}
     </DropdownItem>
     <DropdownItem tag={Link} to="/admin/configuration">
-      <FontAwesomeIcon icon="list" />{' '}
+      <FontAwesomeIcon icon="list" />{" "}
     </DropdownItem>
     <DropdownItem tag={Link} to="/admin/audits">
-      <FontAwesomeIcon icon="bell" />{' '}
+      <FontAwesomeIcon icon="bell" />{" "}
     </DropdownItem>
     {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}
     <DropdownItem tag={Link} to="/admin/logs">
-      <FontAwesomeIcon icon="tasks" />{' '}
+      <FontAwesomeIcon icon="tasks" />{" "}
     </DropdownItem>
   </>
 );
@@ -35,7 +35,12 @@ const swaggerItem = (
 );
 
 export const AdminMenu = ({ showSwagger }) => (
-  <NavDropdown icon="user-plus" name="Administration" style={{ width: '140%' }} id="admin-menu">
+  <NavDropdown
+    icon="user-plus"
+    name="Administration"
+    style={{ width: "140%" }}
+    id="admin-menu"
+  >
     {adminMenuItems}
     {showSwagger && swaggerItem}
   </NavDropdown>

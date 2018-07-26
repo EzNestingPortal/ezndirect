@@ -1,22 +1,44 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Label, Row, Col } from 'reactstrap';
-import { AvForm, AvGroup, AvInput, AvField, AvFeedback } from 'availity-reactstrap-validation';
-import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { connect } from "react-redux";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { Button, Label, Row, Col } from "reactstrap";
+import {
+  AvForm,
+  AvGroup,
+  AvInput,
+  AvField,
+  AvFeedback
+} from "availity-reactstrap-validation";
+import {
+  ICrudGetAction,
+  ICrudGetAllAction,
+  ICrudPutAction
+} from "react-jhipster";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { IUser } from 'app/shared/model/user.model';
-import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
-import { IRootState } from 'app/shared/reducers';
+import { IUser } from "app/shared/model/user.model";
+import {
+  getUser,
+  getRoles,
+  updateUser,
+  createUser,
+  reset
+} from "app/modules/administration/user-management/user-management.reducer";
+import { IRootState } from "app/shared/reducers";
 
-export interface IUserManagementUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
+export interface IUserManagementUpdateProps
+  extends StateProps,
+    DispatchProps,
+    RouteComponentProps<{ login: string }> {}
 
 export interface IUserManagementUpdateState {
   isNew: boolean;
 }
 
-export class UserManagementUpdate extends React.Component<IUserManagementUpdateProps, IUserManagementUpdateState> {
+export class UserManagementUpdate extends React.Component<
+  IUserManagementUpdateProps,
+  IUserManagementUpdateState
+> {
   state: IUserManagementUpdateState = {
     isNew: !this.props.match.params || !this.props.match.params.login
   };
@@ -40,7 +62,7 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
   };
 
   handleClose = () => {
-    this.props.history.push('/admin/user-management');
+    this.props.history.push("/admin/user-management");
   };
 
   render() {
@@ -63,7 +85,14 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                 {user.id ? (
                   <AvGroup>
                     <Label for="id">ID</Label>
-                    <AvField type="text" className="form-control" name="id" required readOnly value={user.id} />
+                    <AvField
+                      type="text"
+                      className="form-control"
+                      name="id"
+                      required
+                      readOnly
+                      value={user.id}
+                    />
                   </AvGroup>
                 ) : null}
                 <AvGroup>
@@ -75,19 +104,22 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     validate={{
                       required: {
                         value: true,
-                        errorMessage: 'Your username is required.'
+                        errorMessage: "Your username is required."
                       },
                       pattern: {
-                        value: '^[_.@A-Za-z0-9-]*$',
-                        errorMessage: 'Your username can only contain letters and digits.'
+                        value: "^[_.@A-Za-z0-9-]*$",
+                        errorMessage:
+                          "Your username can only contain letters and digits."
                       },
                       minLength: {
                         value: 1,
-                        errorMessage: 'Your username is required to be at least 1 character.'
+                        errorMessage:
+                          "Your username is required to be at least 1 character."
                       },
                       maxLength: {
                         value: 50,
-                        errorMessage: 'Your username cannot be longer than 50 characters.'
+                        errorMessage:
+                          "Your username cannot be longer than 50 characters."
                       }
                     }}
                     value={user.login}
@@ -102,7 +134,8 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     validate={{
                       maxLength: {
                         value: 50,
-                        errorMessage: 'This field cannot be longer than {{ max }} characters.'
+                        errorMessage:
+                          "This field cannot be longer than {{ max }} characters."
                       }
                     }}
                     value={user.firstName}
@@ -117,12 +150,15 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     validate={{
                       maxLength: {
                         value: 50,
-                        errorMessage: 'This field cannot be longer than {{ max }} characters.'
+                        errorMessage:
+                          "This field cannot be longer than {{ max }} characters."
                       }
                     }}
                     value={user.lastName}
                   />
-                  <AvFeedback>This field cannot be longer than 50 characters.</AvFeedback>
+                  <AvFeedback>
+                    This field cannot be longer than 50 characters.
+                  </AvFeedback>
                 </AvGroup>
                 <AvGroup>
                   <AvField
@@ -133,18 +169,20 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     validate={{
                       required: {
                         value: true,
-                        errorMessage: 'Your email is required.'
+                        errorMessage: "Your email is required."
                       },
                       email: {
-                        errorMessage: 'Your email is invalid.'
+                        errorMessage: "Your email is invalid."
                       },
                       minLength: {
                         value: 5,
-                        errorMessage: 'Your email is required to be at least 5 characters.'
+                        errorMessage:
+                          "Your email is required to be at least 5 characters."
                       },
                       maxLength: {
                         value: 254,
-                        errorMessage: 'Your email cannot be longer than 50 characters.'
+                        errorMessage:
+                          "Your email cannot be longer than 50 characters."
                       }
                     }}
                     value={user.email}
@@ -152,12 +190,23 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                 </AvGroup>
                 <AvGroup check>
                   <Label>
-                    <AvInput type="checkbox" name="activated" value={user.activated} /> Activated
+                    <AvInput
+                      type="checkbox"
+                      name="activated"
+                      value={user.activated}
+                    />{" "}
+                    Activated
                   </Label>
                 </AvGroup>
                 <AvGroup>
                   <Label for="authorities">Language Key</Label>
-                  <AvInput type="select" className="form-control" name="authorities" value={user.authorities} multiple>
+                  <AvInput
+                    type="select"
+                    className="form-control"
+                    name="authorities"
+                    value={user.authorities}
+                    multiple
+                  >
                     {roles.map(role => (
                       <option value={role} key={role}>
                         {role}
@@ -165,12 +214,21 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     ))}
                   </AvInput>
                 </AvGroup>
-                <Button tag={Link} to="/admin/user-management" replace color="info">
+                <Button
+                  tag={Link}
+                  to="/admin/user-management"
+                  replace
+                  color="info"
+                >
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">Back</span>
                 </Button>
                 &nbsp;
-                <Button color="primary" type="submit" disabled={isInvalid || updating}>
+                <Button
+                  color="primary"
+                  type="submit"
+                  disabled={isInvalid || updating}
+                >
                   <FontAwesomeIcon icon="save" />&nbsp; Save
                 </Button>
               </AvForm>

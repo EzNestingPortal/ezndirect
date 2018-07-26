@@ -1,9 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Table, Input, Row, Col, Badge } from 'reactstrap';
+import React from "react";
+import { connect } from "react-redux";
+import { Table, Input, Row, Col, Badge } from "reactstrap";
 
-import { getConfigurations, getEnv } from '../administration.reducer';
-import { IRootState } from 'app/shared/reducers';
+import {
+  getConfigurations,
+  getEnv
+} from "app/modules/administration/administration.reducer";
+import { IRootState } from "app/shared/reducers";
 
 export interface IConfigurationPageProps extends StateProps, DispatchProps {}
 
@@ -13,9 +16,12 @@ export interface IConfigurationPageState {
   reverseProperties: boolean;
 }
 
-export class ConfigurationPage extends React.Component<IConfigurationPageProps, IConfigurationPageState> {
+export class ConfigurationPage extends React.Component<
+  IConfigurationPageProps,
+  IConfigurationPageState
+> {
   state: IConfigurationPageState = {
-    filter: '',
+    filter: "",
     reversePrefix: false,
     reverseProperties: false
   };
@@ -31,8 +37,10 @@ export class ConfigurationPage extends React.Component<IConfigurationPageProps, 
     });
   };
 
-  envFilterFn = configProp => configProp.toUpperCase().includes(this.state.filter.toUpperCase());
-  propsFilterFn = configProp => configProp.prefix.toUpperCase().includes(this.state.filter.toUpperCase());
+  envFilterFn = configProp =>
+    configProp.toUpperCase().includes(this.state.filter.toUpperCase());
+  propsFilterFn = configProp =>
+    configProp.prefix.toUpperCase().includes(this.state.filter.toUpperCase());
 
   reversePrefix = () => {
     this.setState({
@@ -54,12 +62,22 @@ export class ConfigurationPage extends React.Component<IConfigurationPageProps, 
   render() {
     const { configuration } = this.props;
     const { filter } = this.state;
-    const configProps = configuration && configuration.configProps ? configuration.configProps : {};
+    const configProps =
+      configuration && configuration.configProps
+        ? configuration.configProps
+        : {};
     const env = configuration && configuration.env ? configuration.env : {};
     return (
       <div>
         <h2 className="configuration-page-heading">Configuration</h2>
-        <span>Filter</span> <Input type="search" value={filter} onChange={this.setFilter} name="search" id="search" />
+        <span>Filter</span>{" "}
+        <Input
+          type="search"
+          value={filter}
+          onChange={this.setFilter}
+          name="search"
+          id="search"
+        />
         <label>Spring configuration</label>
         <Table className="table table-striped table-bordered table-responsive d-table">
           <thead>
@@ -74,16 +92,22 @@ export class ConfigurationPage extends React.Component<IConfigurationPageProps, 
                   .filter(this.propsFilterFn)
                   .map((property, propIndex) => (
                     <tr key={propIndex}>
-                      <td>{property['prefix']}</td>
+                      <td>{property["prefix"]}</td>
                       <td>
-                        {Object.keys(property['properties']).map((propKey, index) => (
-                          <Row key={index}>
-                            <Col md="4">{propKey}</Col>
-                            <Col md="8">
-                              <Badge className="float-right badge-secondary break">{JSON.stringify(property['properties'][propKey])}</Badge>
-                            </Col>
-                          </Row>
-                        ))}
+                        {Object.keys(property["properties"]).map(
+                          (propKey, index) => (
+                            <Row key={index}>
+                              <Col md="4">{propKey}</Col>
+                              <Col md="8">
+                                <Badge className="float-right badge-secondary break">
+                                  {JSON.stringify(
+                                    property["properties"][propKey]
+                                  )}
+                                </Badge>
+                              </Col>
+                            </Row>
+                          )
+                        )}
                       </td>
                     </tr>
                   ))
@@ -110,7 +134,9 @@ export class ConfigurationPage extends React.Component<IConfigurationPageProps, 
                         <tr key={propIndex}>
                           <td className="break">{propKey}</td>
                           <td className="break">
-                            <span className="float-right badge badge-secondary break">{envKey.properties[propKey].value}</span>
+                            <span className="float-right badge badge-secondary break">
+                              {envKey.properties[propKey].value}
+                            </span>
                           </td>
                         </tr>
                       ))}

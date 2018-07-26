@@ -1,2 +1,0 @@
-export const GET_MY_PRICE_SUCCESS = "GET_MY_PRICE_SUCCESS";
-export const GET_MY_PRICE_FAIL = "GET_MY_PRICE_FAIL";
