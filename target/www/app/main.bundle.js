@@ -112,7 +112,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f64766d66493cdbb203a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7aaae4b1eb13e5102a3c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -2101,9 +2101,11 @@ __webpack_require__.r(__webpack_exports__);
 var devTools =  true ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_config_devtools__WEBPACK_IMPORTED_MODULE_5__["default"], null) : undefined;
 var store = Object(app_config_store__WEBPACK_IMPORTED_MODULE_6__["default"])();
 var actions = Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])({ clearAuthentication: app_shared_reducers_authentication__WEBPACK_IMPORTED_MODULE_8__["clearAuthentication"] }, store.dispatch);
-Object(app_config_axios_interceptor__WEBPACK_IMPORTED_MODULE_7__["default"])(function () { return actions.clearAuthentication('login.error.unauthorized'); });
+Object(app_config_axios_interceptor__WEBPACK_IMPORTED_MODULE_7__["default"])(function () {
+    return actions.clearAuthentication("login.error.unauthorized");
+});
 Object(app_config_icon_loader__WEBPACK_IMPORTED_MODULE_11__["loadIcons"])();
-var rootEl = document.getElementById('root');
+var rootEl = document.getElementById("root");
 var render = function (Component) {
     return react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_error_error_boundary__WEBPACK_IMPORTED_MODULE_9__["default"], null,
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_hot_loader__WEBPACK_IMPORTED_MODULE_4__["AppContainer"], null,
@@ -2287,7 +2289,7 @@ var PasswordResetFinishPage = /** @class */ (function (_super) {
     function PasswordResetFinishPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            password: '',
+            password: "",
             key: _this.props.match.params.key
         };
         _this.handleValidSubmit = function (event, values) {
@@ -2303,17 +2305,38 @@ var PasswordResetFinishPage = /** @class */ (function (_super) {
     };
     PasswordResetFinishPage.prototype.getResetForm = function () {
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvForm"], { onValidSubmit: this.handleValidSubmit },
-            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { name: "newPassword", label: "New password", placeholder: 'New password', type: "password", validate: {
-                    required: { value: true, errorMessage: 'Your password is required.' },
-                    minLength: { value: 4, errorMessage: 'Your password is required to be at least 4 characters.' },
-                    maxLength: { value: 50, errorMessage: 'Your password cannot be longer than 50 characters.' }
+            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { name: "newPassword", label: "New password", placeholder: "New password", type: "password", validate: {
+                    required: {
+                        value: true,
+                        errorMessage: "Your password is required."
+                    },
+                    minLength: {
+                        value: 4,
+                        errorMessage: "Your password is required to be at least 4 characters."
+                    },
+                    maxLength: {
+                        value: 50,
+                        errorMessage: "Your password cannot be longer than 50 characters."
+                    }
                 }, onChange: this.updatePassword }),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_shared_layout_password_password_strength_bar__WEBPACK_IMPORTED_MODULE_6__["default"], { password: this.state.password }),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { name: "confirmPassword", label: "New password confirmation", placeholder: "Confirm the new password", type: "password", validate: {
-                    required: { value: true, errorMessage: 'Your confirmation password is required.' },
-                    minLength: { value: 4, errorMessage: 'Your confirmation password is required to be at least 4 characters.' },
-                    maxLength: { value: 50, errorMessage: 'Your confirmation password cannot be longer than 50 characters.' },
-                    match: { value: 'newPassword', errorMessage: 'The password and its confirmation do not match!' }
+                    required: {
+                        value: true,
+                        errorMessage: "Your confirmation password is required."
+                    },
+                    minLength: {
+                        value: 4,
+                        errorMessage: "Your confirmation password is required to be at least 4 characters."
+                    },
+                    maxLength: {
+                        value: 50,
+                        errorMessage: "Your confirmation password cannot be longer than 50 characters."
+                    },
+                    match: {
+                        value: "newPassword",
+                        errorMessage: "The password and its confirmation do not match!"
+                    }
                 } }),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { color: "success", type: "submit" }, "Validate new password")));
     };
@@ -2383,9 +2406,18 @@ var PasswordResetInit = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Enter the email address you used to register")),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvForm"], { onValidSubmit: this.handleValidSubmit },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "email", label: "Email", placeholder: "Your email", type: "email", validate: {
-                                required: { value: true, errorMessage: 'Your email is required.' },
-                                minLength: { value: 5, errorMessage: 'Your email is required to be at least 5 characters.' },
-                                maxLength: { value: 254, errorMessage: 'Your email cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your email is required."
+                                },
+                                minLength: {
+                                    value: 5,
+                                    errorMessage: "Your email is required to be at least 5 characters."
+                                },
+                                maxLength: {
+                                    value: 254,
+                                    errorMessage: "Your email cannot be longer than 50 characters."
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "primary", type: "submit" }, "Reset password"))))));
     };
@@ -2643,7 +2675,7 @@ var RegisterPage = /** @class */ (function (_super) {
     function RegisterPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            password: ''
+            password: ""
         };
         _this.handleValidSubmit = function (event, values) {
             _this.props.handleRegister(values.username, values.email, values.firstPassword);
@@ -2666,27 +2698,69 @@ var RegisterPage = /** @class */ (function (_super) {
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], { md: "8" },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvForm"], { id: "register-form", onValidSubmit: this.handleValidSubmit },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "username", label: "Username", placeholder: "Your username", validate: {
-                                required: { value: true, errorMessage: 'Your username is required.' },
-                                pattern: { value: '^[_.@A-Za-z0-9-]*$', errorMessage: 'Your username can only contain letters and digits.' },
-                                minLength: { value: 1, errorMessage: 'Your username is required to be at least 1 character.' },
-                                maxLength: { value: 50, errorMessage: 'Your username cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your username is required."
+                                },
+                                pattern: {
+                                    value: "^[_.@A-Za-z0-9-]*$",
+                                    errorMessage: "Your username can only contain letters and digits."
+                                },
+                                minLength: {
+                                    value: 1,
+                                    errorMessage: "Your username is required to be at least 1 character."
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your username cannot be longer than 50 characters."
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "email", label: "Email", placeholder: "Your email", type: "email", validate: {
-                                required: { value: true, errorMessage: 'Your email is required.' },
-                                minLength: { value: 5, errorMessage: 'Your email is required to be at least 5 characters.' },
-                                maxLength: { value: 254, errorMessage: 'Your email cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your email is required."
+                                },
+                                minLength: {
+                                    value: 5,
+                                    errorMessage: "Your email is required to be at least 5 characters."
+                                },
+                                maxLength: {
+                                    value: 254,
+                                    errorMessage: "Your email cannot be longer than 50 characters."
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "firstPassword", label: "New password", placeholder: "New password", type: "password", onChange: this.updatePassword, validate: {
-                                required: { value: true, errorMessage: 'Your password is required.' },
-                                minLength: { value: 4, errorMessage: 'Your password is required to be at least 4 characters.' },
-                                maxLength: { value: 50, errorMessage: 'Your password cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your password is required."
+                                },
+                                minLength: {
+                                    value: 4,
+                                    errorMessage: "Your password is required to be at least 4 characters."
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your password cannot be longer than 50 characters."
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_shared_layout_password_password_strength_bar__WEBPACK_IMPORTED_MODULE_5__["default"], { password: this.state.password }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "secondPassword", label: "New password confirmation", placeholder: "Confirm the new password", type: "password", validate: {
-                                required: { value: true, errorMessage: 'Your confirmation password is required.' },
-                                minLength: { value: 4, errorMessage: 'Your confirmation password is required to be at least 4 characters.' },
-                                maxLength: { value: 50, errorMessage: 'Your confirmation password cannot be longer than 50 characters.' },
-                                match: { value: 'firstPassword', errorMessage: 'The password and its confirmation do not match!' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your confirmation password is required."
+                                },
+                                minLength: {
+                                    value: 4,
+                                    errorMessage: "Your confirmation password is required to be at least 4 characters."
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your confirmation password cannot be longer than 50 characters."
+                                },
+                                match: {
+                                    value: "firstPassword",
+                                    errorMessage: "The password and its confirmation do not match!"
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { id: "register-submit", color: "primary", type: "submit" }, "Register")),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "\u00A0"),
@@ -3372,7 +3446,9 @@ var Login = /** @class */ (function (_super) {
     };
     Login.prototype.render = function () {
         var _a = this.props, location = _a.location, isAuthenticated = _a.isAuthenticated;
-        var from = (location.state || { from: { pathname: '/', search: location.search } }).from;
+        var from = (location.state || {
+            from: { pathname: "/", search: location.search }
+        }).from;
         var showModal = this.state.showModal;
         if (isAuthenticated) {
             return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], { to: from });
@@ -3719,7 +3795,7 @@ var Plan = /** @class */ (function (_super) {
                         " (",
                         service.frequency,
                         ")")); })))));
-        return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "PlanContainer" }, details));
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "PlanContainer" }, details);
     };
     return Plan;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]));
@@ -3756,8 +3832,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ACTION_TYPES = {
-    GET_MY_PRICE: 'pricing/GET_MY_PRICE',
-    RESET: 'pricing/RESET'
+    GET_MY_PRICE: "pricing/GET_MY_PRICE",
+    RESET: "pricing/RESET"
 };
 var initialState = {
     loading: false,
@@ -3788,7 +3864,7 @@ var initialState = {
 // Actions
 var handleGetMyPrice = function (lotSize, floorSize, floors) { return ({
     type: ACTION_TYPES.GET_MY_PRICE,
-    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/pricing', {
+    payload: axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/pricing", {
         params: {
             lotSize: lotSize,
             floorSize: floorSize,
@@ -3916,7 +3992,10 @@ var Pricing = /** @class */ (function (_super) {
                             { value: "0", displayValue: "Lot Size..." },
                             { value: "5000", displayValue: "Up to 5000 Sq. Ft." },
                             { value: "10000", displayValue: "5000 Sq. Ft. to 10,000 Sq. Ft." },
-                            { value: "15000", displayValue: "10,000 Sq. Ft. to 15,000 Sq. Ft." },
+                            {
+                                value: "15000",
+                                displayValue: "10,000 Sq. Ft. to 15,000 Sq. Ft."
+                            },
                             { value: "20000", displayValue: "Above 15,000 Sq. Ft." }
                         ]
                     },
@@ -3987,12 +4066,15 @@ var Pricing = /** @class */ (function (_super) {
             for (var inputIdentifier_1 in updatedPricingForm) {
                 isFormValid = updatedPricingForm[inputIdentifier_1].valid && isFormValid;
             }
-            _this.setState({ pricingForm: updatedPricingForm, isFormValid: isFormValid });
+            _this.setState({
+                pricingForm: updatedPricingForm,
+                isFormValid: isFormValid
+            });
         };
         _this.submithandler = function (event) {
-            var lotSize = _this.state.pricingForm['lotSize'].value;
-            var floorSize = _this.state.pricingForm['floorSize'].value;
-            var floors = _this.state.pricingForm['floors'].value;
+            var lotSize = _this.state.pricingForm["lotSize"].value;
+            var floorSize = _this.state.pricingForm["floorSize"].value;
+            var floors = _this.state.pricingForm["floors"].value;
             _this.props.handleGetMyPrice(lotSize, floorSize, floors);
             event.preventDefault();
         };
@@ -4029,10 +4111,8 @@ var Pricing = /** @class */ (function (_super) {
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_pricing_UI_Button_Button__WEBPACK_IMPORTED_MODULE_6__["default"], { btnType: "btn-success", clicked: this.submithandler }, "GET MY PRICE"))));
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "FormContainer" }, form),
-            this.props.showPlan ?
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_3___default.a, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, settings), this.props.subscriptions.map(function (subscription, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { key: "ID" + (i + 1) },
-                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_pricing_plan_plan__WEBPACK_IMPORTED_MODULE_7__["default"], { circle: "Circle" + (i + 1), heading: "Heading" + (i + 1), header: "Header" + (i + 1), planName: subscription.subscriptionName, discountedPrice: subscription.discountedPrice, originalAmount: subscription.originalAmount, yearlySavings: subscription.yearlySavings, idleMonths: subscription.idleMonths, services: subscription.services }))); }))
-                : null));
+            this.props.showPlan ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_slick__WEBPACK_IMPORTED_MODULE_3___default.a, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, settings), this.props.subscriptions.map(function (subscription, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { key: "ID" + (i + 1) },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_pricing_plan_plan__WEBPACK_IMPORTED_MODULE_7__["default"], { circle: "Circle" + (i + 1), heading: "Heading" + (i + 1), header: "Header" + (i + 1), planName: subscription.subscriptionName, discountedPrice: subscription.discountedPrice, originalAmount: subscription.originalAmount, yearlySavings: subscription.yearlySavings, idleMonths: subscription.idleMonths, services: subscription.services }))); }))) : null));
     };
     return Pricing;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]));
@@ -4098,7 +4178,9 @@ var Account = react_loadable__WEBPACK_IMPORTED_MODULE_2___default()({
     loading: function () { return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading ..."); }
 });
 var Admin = react_loadable__WEBPACK_IMPORTED_MODULE_2___default()({
-    loader: function () { return __webpack_require__.e(/*! import() | administration */ "administration").then(__webpack_require__.bind(null, /*! app/modules/administration */ "./src/main/webapp/app/modules/administration/index.tsx")); },
+    loader: function () {
+        return __webpack_require__.e(/*! import() | administration */ "administration").then(__webpack_require__.bind(null, /*! app/modules/administration */ "./src/main/webapp/app/modules/administration/index.tsx"));
+    },
     loading: function () { return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading ..."); }
 });
 // tslint:enable
@@ -4522,7 +4604,8 @@ var Header = /** @class */ (function (_super) {
                     react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Nav"], { id: "header-tabs", className: "ml-auto", navbar: true },
                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(app_shared_layout_header_header_components__WEBPACK_IMPORTED_MODULE_5__["Home"], null),
                         isAuthenticated && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(app_shared_layout_header_menus__WEBPACK_IMPORTED_MODULE_6__["EntitiesMenu"], null),
-                        isAuthenticated && isAdmin && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(app_shared_layout_header_menus__WEBPACK_IMPORTED_MODULE_6__["AdminMenu"], { showSwagger: isSwaggerEnabled }),
+                        isAuthenticated &&
+                            isAdmin && react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(app_shared_layout_header_menus__WEBPACK_IMPORTED_MODULE_6__["AdminMenu"], { showSwagger: isSwaggerEnabled }),
                         react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(app_shared_layout_header_menus__WEBPACK_IMPORTED_MODULE_6__["AccountMenu"], { isAuthenticated: isAuthenticated }))))));
     };
     return Header;
@@ -4559,20 +4642,20 @@ __webpack_require__.r(__webpack_exports__);
 var accountMenuItemsAuthenticated = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/account/settings" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "wrench" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/account/password" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "clock" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/logout" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "sign-out-alt" }),
-        ' ')));
+        " ")));
 var accountMenuItems = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { id: "login-item", tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/login" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "sign-in-alt" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/register" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "sign-in-alt" }),
-        ' ')));
+        " ")));
 var AccountMenu = function (_a) {
     var _b = _a.isAuthenticated, isAuthenticated = _b === void 0 ? false : _b;
     return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_layout_header_header_components__WEBPACK_IMPORTED_MODULE_4__["NavDropdown"], { icon: "user", name: "Account", id: "account-menu" }, isAuthenticated ? accountMenuItemsAuthenticated : accountMenuItems));
@@ -4609,27 +4692,27 @@ __webpack_require__.r(__webpack_exports__);
 var adminMenuItems = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null,
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/user-management" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "user" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/metrics" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "tachometer-alt" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/health" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "heart" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/configuration" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "list" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/audits" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "bell" }),
-        ' '),
+        " "),
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/logs" },
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "tasks" }),
-        ' ')));
+        " ")));
 var swaggerItem = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], { tag: react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], to: "/admin/docs" },
     react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__["FontAwesomeIcon"], { icon: "book" })));
 var AdminMenu = function (_a) {
     var showSwagger = _a.showSwagger;
-    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_layout_header_header_components__WEBPACK_IMPORTED_MODULE_4__["NavDropdown"], { icon: "user-plus", name: "Administration", style: { width: '140%' }, id: "admin-menu" },
+    return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(app_shared_layout_header_header_components__WEBPACK_IMPORTED_MODULE_4__["NavDropdown"], { icon: "user-plus", name: "Administration", style: { width: "140%" }, id: "admin-menu" },
         adminMenuItems,
         showSwagger && swaggerItem));
 };

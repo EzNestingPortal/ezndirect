@@ -61,7 +61,7 @@ var AuditsPage = /** @class */ (function (_super) {
         };
         _this.sort = function (prop) { return function () {
             _this.setState({
-                order: _this.state.order === 'asc' ? 'desc' : 'asc',
+                order: _this.state.order === "asc" ? "desc" : "asc",
                 sort: prop
             }, function () { return _this.transition(); });
         }; };
@@ -69,7 +69,9 @@ var AuditsPage = /** @class */ (function (_super) {
             _this.getAudits();
             _this.props.history.push(_this.props.location.pathname + "?page=" + _this.state.activePage + "&sort=" + _this.state.sort + "," + _this.state.order);
         };
-        _this.handlePagination = function (activePage) { return _this.setState({ activePage: activePage }, function () { return _this.transition(); }); };
+        _this.handlePagination = function (activePage) {
+            return _this.setState({ activePage: activePage }, function () { return _this.transition(); });
+        };
         _this.getAudits = function () {
             var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order, fromDate = _a.fromDate, toDate = _a.toDate;
             _this.props.getAudits(activePage - 1, itemsPerPage, sort + "," + order, fromDate, toDate);
@@ -91,13 +93,13 @@ var AuditsPage = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Table"], { striped: true, responsive: true },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort('auditEventDate') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort("auditEventDate") },
                             "Date",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort('principal') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort("principal") },
                             "User",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort('auditEventType') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { onClick: this.sort("auditEventType") },
                             "State",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sort" })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Extra data"))),
@@ -153,7 +155,7 @@ var ConfigurationPage = /** @class */ (function (_super) {
     function ConfigurationPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            filter: '',
+            filter: "",
             reversePrefix: false,
             reverseProperties: false
         };
@@ -162,8 +164,12 @@ var ConfigurationPage = /** @class */ (function (_super) {
                 filter: evt.target.value
             });
         };
-        _this.envFilterFn = function (configProp) { return configProp.toUpperCase().includes(_this.state.filter.toUpperCase()); };
-        _this.propsFilterFn = function (configProp) { return configProp.prefix.toUpperCase().includes(_this.state.filter.toUpperCase()); };
+        _this.envFilterFn = function (configProp) {
+            return configProp.toUpperCase().includes(_this.state.filter.toUpperCase());
+        };
+        _this.propsFilterFn = function (configProp) {
+            return configProp.prefix.toUpperCase().includes(_this.state.filter.toUpperCase());
+        };
         _this.reversePrefix = function () {
             _this.setState({
                 reversePrefix: !_this.state.reversePrefix
@@ -189,7 +195,9 @@ var ConfigurationPage = /** @class */ (function (_super) {
         var _this = this;
         var configuration = this.props.configuration;
         var filter = this.state.filter;
-        var configProps = configuration && configuration.configProps ? configuration.configProps : {};
+        var configProps = configuration && configuration.configProps
+            ? configuration.configProps
+            : {};
         var env = configuration && configuration.env ? configuration.env : {};
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { className: "configuration-page-heading" }, "Configuration"),
@@ -206,11 +214,11 @@ var ConfigurationPage = /** @class */ (function (_super) {
                     ? Object.values(this.getContextList(configProps.contexts))
                         .filter(this.propsFilterFn)
                         .map(function (property, propIndex) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: propIndex },
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, property['prefix']),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, Object.keys(property['properties']).map(function (propKey, index) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], { key: index },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, property["prefix"]),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, Object.keys(property["properties"]).map(function (propKey, index) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], { key: index },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "4" }, propKey),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "8" },
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Badge"], { className: "float-right badge-secondary break" }, JSON.stringify(property['properties'][propKey]))))); })))); })
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Badge"], { className: "float-right badge-secondary break" }, JSON.stringify(property["properties"][propKey]))))); })))); })
                     : null)),
             env.propertySources
                 ? env.propertySources.map(function (envKey, envIndex) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { key: envIndex },
@@ -371,7 +379,7 @@ var HealthPage = /** @class */ (function (_super) {
         };
         _this.renderModal = function () {
             var healthObject = _this.state.healthObject;
-            return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_administration_health_health_modal__WEBPACK_IMPORTED_MODULE_6__["default"], { healthObject: healthObject, handleClose: _this.handleClose, showModal: _this.state.showModal });
+            return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_administration_health_health_modal__WEBPACK_IMPORTED_MODULE_6__["default"], { healthObject: healthObject, handleClose: _this.handleClose, showModal: _this.state.showModal }));
         };
         return _this;
     }
@@ -385,7 +393,7 @@ var HealthPage = /** @class */ (function (_super) {
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { className: "health-page-heading" }, "Health Checks"),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { onClick: this.getSystemHealth, color: isFetching ? 'btn btn-danger' : 'btn btn-primary', disabled: isFetching },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { onClick: this.getSystemHealth, color: isFetching ? "btn btn-danger" : "btn btn-primary", disabled: isFetching },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], { icon: "sync" }),
                     "\u00A0 Refresh")),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
@@ -397,10 +405,12 @@ var HealthPage = /** @class */ (function (_super) {
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Status"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Details"))),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, Object.keys(data).map(function (configPropKey, configPropIndex) {
-                            return configPropKey !== 'status' ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: configPropIndex },
+                            return configPropKey !== "status" ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: configPropIndex },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, configPropKey),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Badge"], { color: data[configPropKey].status !== 'UP' ? 'danger' : 'success' }, data[configPropKey].status)),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Badge"], { color: data[configPropKey].status !== "UP"
+                                            ? "danger"
+                                            : "success" }, data[configPropKey].status)),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, data[configPropKey].details ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", { onClick: _this.getSystemHealthInfo(configPropKey, data[configPropKey]) },
                                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__["FontAwesomeIcon"], { icon: "eye" }))) : null))) : null;
                         }))))),
@@ -493,7 +503,7 @@ var LogsPage = /** @class */ (function (_super) {
     function LogsPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            filter: ''
+            filter: ""
         };
         _this.getLogs = function () {
             if (!_this.props.isFetching) {
@@ -508,8 +518,12 @@ var LogsPage = /** @class */ (function (_super) {
                 filter: evt.target.value
             });
         };
-        _this.getClassName = function (level, check, className) { return (level === check ? "btn btn-sm btn-" + className : 'btn btn-sm btn-light'); };
-        _this.filterFn = function (l) { return l.name.toUpperCase().includes(_this.state.filter.toUpperCase()); };
+        _this.getClassName = function (level, check, className) {
+            return level === check ? "btn btn-sm btn-" + className : "btn btn-sm btn-light";
+        };
+        _this.filterFn = function (l) {
+            return l.name.toUpperCase().includes(_this.state.filter.toUpperCase());
+        };
         return _this;
     }
     LogsPage.prototype.componentDidMount = function () {
@@ -539,12 +553,12 @@ var LogsPage = /** @class */ (function (_super) {
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, logger.name)),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'TRACE'), className: _this.getClassName(logger.level, 'TRACE', 'primary') }, "TRACE"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'DEBUG'), className: _this.getClassName(logger.level, 'DEBUG', 'success') }, "DEBUG"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'INFO'), className: _this.getClassName(logger.level, 'INFO', 'info') }, "INFO"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'WARN'), className: _this.getClassName(logger.level, 'WARN', 'warning') }, "WARN"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'ERROR'), className: _this.getClassName(logger.level, 'ERROR', 'danger') }, "ERROR"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, 'OFF'), className: _this.getClassName(logger.level, 'OFF', 'secondary') }, "OFF")))); })))));
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "TRACE"), className: _this.getClassName(logger.level, "TRACE", "primary") }, "TRACE"),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "DEBUG"), className: _this.getClassName(logger.level, "DEBUG", "success") }, "DEBUG"),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "INFO"), className: _this.getClassName(logger.level, "INFO", "info") }, "INFO"),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "WARN"), className: _this.getClassName(logger.level, "WARN", "warning") }, "WARN"),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "ERROR"), className: _this.getClassName(logger.level, "ERROR", "danger") }, "ERROR"),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", { disabled: isFetching, onClick: _this.changeLevel(logger.name, "OFF"), className: _this.getClassName(logger.level, "OFF", "secondary") }, "OFF")))); })))));
     };
     return LogsPage;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component));
@@ -589,17 +603,20 @@ var MetricsModal = /** @class */ (function (_super) {
     function MetricsModal() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            badgeFilter: '',
-            searchFilter: ''
+            badgeFilter: "",
+            searchFilter: ""
         };
         _this.computeFilteredList = function () {
             var _a = _this.state, badgeFilter = _a.badgeFilter, searchFilter = _a.searchFilter;
             var filteredList = _this.props.threadDump.threads;
-            if (badgeFilter !== '') {
+            if (badgeFilter !== "") {
                 filteredList = filteredList.filter(function (t) { return t.threadState === badgeFilter; });
             }
-            if (searchFilter !== '') {
-                filteredList = filteredList.filter(function (t) { return t.lockName && t.lockName.toLowerCase().includes(searchFilter.toLowerCase()); });
+            if (searchFilter !== "") {
+                filteredList = filteredList.filter(function (t) {
+                    return t.lockName &&
+                        t.lockName.toLowerCase().includes(searchFilter.toLowerCase());
+                });
             }
             return filteredList;
         };
@@ -611,41 +628,53 @@ var MetricsModal = /** @class */ (function (_super) {
             var threadDumpBlocked = 0;
             _this.props.threadDump.threads.forEach(function (t) {
                 switch (t.threadState) {
-                    case 'RUNNABLE':
+                    case "RUNNABLE":
                         threadDumpRunnable++;
                         break;
-                    case 'WAITING':
+                    case "WAITING":
                         threadDumpWaiting++;
                         break;
-                    case 'TIMED_WAITING':
+                    case "TIMED_WAITING":
                         threadDumpTimedWaiting++;
                         break;
-                    case 'BLOCKED':
+                    case "BLOCKED":
                         threadDumpBlocked++;
                         break;
                     default:
                         break;
                 }
             });
-            threadDumpAll = threadDumpRunnable + threadDumpWaiting + threadDumpTimedWaiting + threadDumpBlocked;
-            return { threadDumpAll: threadDumpAll, threadDumpRunnable: threadDumpRunnable, threadDumpWaiting: threadDumpWaiting, threadDumpTimedWaiting: threadDumpTimedWaiting, threadDumpBlocked: threadDumpBlocked };
+            threadDumpAll =
+                threadDumpRunnable +
+                    threadDumpWaiting +
+                    threadDumpTimedWaiting +
+                    threadDumpBlocked;
+            return {
+                threadDumpAll: threadDumpAll,
+                threadDumpRunnable: threadDumpRunnable,
+                threadDumpWaiting: threadDumpWaiting,
+                threadDumpTimedWaiting: threadDumpTimedWaiting,
+                threadDumpBlocked: threadDumpBlocked
+            };
         };
         _this.getBadgeClass = function (threadState) {
-            if (threadState === 'RUNNABLE') {
-                return 'badge-success';
+            if (threadState === "RUNNABLE") {
+                return "badge-success";
             }
-            else if (threadState === 'WAITING') {
-                return 'badge-info';
+            else if (threadState === "WAITING") {
+                return "badge-info";
             }
-            else if (threadState === 'TIMED_WAITING') {
-                return 'badge-warning';
+            else if (threadState === "TIMED_WAITING") {
+                return "badge-warning";
             }
-            else if (threadState === 'BLOCKED') {
-                return 'badge-danger';
+            else if (threadState === "BLOCKED") {
+                return "badge-danger";
             }
         };
         _this.updateBadgeFilter = function (badge) { return function () { return _this.setState({ badgeFilter: badge }); }; };
-        _this.updateSearchFilter = function (event) { return _this.setState({ searchFilter: event.target.value }); };
+        _this.updateSearchFilter = function (event) {
+            return _this.setState({ searchFilter: event.target.value });
+        };
         return _this;
     }
     MetricsModal.prototype.render = function () {
@@ -660,33 +689,34 @@ var MetricsModal = /** @class */ (function (_super) {
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Modal"], { isOpen: showModal, toggle: handleClose, className: "modal-lg" },
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["ModalHeader"], { toggle: handleClose }, "Threads dump"),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["ModalBody"], null,
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "primary", className: "hand", onClick: this.updateBadgeFilter('') },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "primary", className: "hand", onClick: this.updateBadgeFilter("") },
                     "All\u00A0",
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { pill: true }, counters.threadDumpAll || 0)),
                 "\u00A0",
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "success", className: "hand", onClick: this.updateBadgeFilter('RUNNABLE') },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "success", className: "hand", onClick: this.updateBadgeFilter("RUNNABLE") },
                     "Runnable\u00A0",
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { pill: true }, counters.threadDumpRunnable || 0)),
                 "\u00A0",
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "info", className: "hand", onClick: this.updateBadgeFilter('WAITING') },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "info", className: "hand", onClick: this.updateBadgeFilter("WAITING") },
                     "Waiting\u00A0",
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { pill: true }, counters.threadDumpWaiting || 0)),
                 "\u00A0",
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "warning", className: "hand", onClick: this.updateBadgeFilter('TIMED_WAITING') },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "warning", className: "hand", onClick: this.updateBadgeFilter("TIMED_WAITING") },
                     "Timed Waiting\u00A0",
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { pill: true }, counters.threadDumpTimedWaiting || 0)),
                 "\u00A0",
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "danger", className: "hand", onClick: this.updateBadgeFilter('BLOCKED') },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { color: "danger", className: "hand", onClick: this.updateBadgeFilter("BLOCKED") },
                     "Blocked\u00A0",
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Badge"], { pill: true }, counters.threadDumpBlocked || 0)),
                 "\u00A0",
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { className: "mt-2" }, "\u00A0"),
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], { type: "text", className: "form-control", placeholder: "Filter by Lock Name...", onChange: this.updateSearchFilter }),
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { style: { padding: '10px' } }, filteredList
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { style: { padding: "10px" } }, filteredList
                     ? filteredList.map(function (threadDumpInfo, i) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", { key: "dump-" + i },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", null,
-                            ' ',
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: 'badge ' + _this.getBadgeClass(threadDumpInfo.threadState) }, threadDumpInfo.threadState),
+                            " ",
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", { className: "badge " +
+                                    _this.getBadgeClass(threadDumpInfo.threadState) }, threadDumpInfo.threadState),
                             "\u00A0",
                             threadDumpInfo.threadName,
                             " (ID ",
@@ -786,12 +816,12 @@ var MetricsPage = /** @class */ (function (_super) {
             };
             if (!_this.props.isFetching && metrics && metrics.timers) {
                 Object.keys(metrics.timers).forEach(function (key, indexNm) {
-                    if (key.indexOf('web.rest') !== -1 || key.indexOf('service') !== -1) {
+                    if (key.indexOf("web.rest") !== -1 || key.indexOf("service") !== -1) {
                         stat.servicesStats[key] = metrics.timers[key];
                     }
-                    if (key.indexOf('net.sf.ehcache.Cache') !== -1) {
+                    if (key.indexOf("net.sf.ehcache.Cache") !== -1) {
                         // remove gets or puts
-                        var index = key.lastIndexOf('.');
+                        var index = key.lastIndexOf(".");
                         var newKey = key.substr(0, index);
                         // Keep the name of the domain
                         stat.cachesStats[newKey] = {
@@ -808,7 +838,7 @@ var MetricsPage = /** @class */ (function (_super) {
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "9" }, label),
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "3", className: "text-right" }, metrics.gauges[key].value))) : null;
         };
-        _this.renderModal = function () { return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_administration_metrics_metrics_modal__WEBPACK_IMPORTED_MODULE_8__["default"], { handleClose: _this.handleClose, showModal: _this.state.showModal, threadDump: _this.props.threadDump }); };
+        _this.renderModal = function () { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_modules_administration_metrics_metrics_modal__WEBPACK_IMPORTED_MODULE_8__["default"], { handleClose: _this.handleClose, showModal: _this.state.showModal, threadDump: _this.props.threadDump })); };
         _this.renderGauges = function (metrics) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { sm: "12" },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "JVM Metrics"),
@@ -818,88 +848,97 @@ var MetricsPage = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Total Memory"),
                             " (",
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.total.used'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.total.used"].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M /",
-                            ' ',
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.total.max'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            " ",
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.total.max"].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M)"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, value: metrics.gauges['jvm.memory.total.used'].value, min: "0", max: metrics.gauges['jvm.memory.total.max'].value, color: "success" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, value: metrics.gauges["jvm.memory.total.used"].value, min: "0", max: metrics.gauges["jvm.memory.total.max"].value, color: "success" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.memory.total.used'].value * 100) / metrics.gauges['jvm.memory.total.max'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.memory.total.used"].value * 100) /
+                                        metrics.gauges["jvm.memory.total.max"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%")),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Heap Memory"),
                             " (",
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.heap.used'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.heap.used"].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M /",
-                            ' ',
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.heap.max'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            " ",
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.heap.max"].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M)"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", max: metrics.gauges['jvm.memory.heap.max'].value, value: metrics.gauges['jvm.memory.heap.used'].value, color: "success" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", max: metrics.gauges["jvm.memory.heap.max"].value, value: metrics.gauges["jvm.memory.heap.used"].value, color: "success" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.memory.heap.used'].value * 100) / metrics.gauges['jvm.memory.heap.max'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.memory.heap.used"].value * 100) /
+                                        metrics.gauges["jvm.memory.heap.max"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%")),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Non-Heap Memory"),
                             " (",
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.non-heap.used'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.non-heap.used"].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M /",
-                            ' ',
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges['jvm.memory.non-heap.committed'].value / 1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                            " ",
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.gauges["jvm.memory.non-heap.committed"].value /
+                                    1048576, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                             "M)"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", max: metrics.gauges['jvm.memory.non-heap.committed'].value, value: metrics.gauges['jvm.memory.non-heap.used'].value, color: "success" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", max: metrics.gauges["jvm.memory.non-heap.committed"].value, value: metrics.gauges["jvm.memory.non-heap.used"].value, color: "success" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.memory.non-heap.used'].value * 100) / metrics.gauges['jvm.memory.non-heap.committed'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.memory.non-heap.used"].value * 100) /
+                                        metrics.gauges["jvm.memory.non-heap.committed"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%"))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "4" },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Threads"),
                         " (Total: ",
-                        metrics.gauges['jvm.threads.count'].value,
+                        metrics.gauges["jvm.threads.count"].value,
                         ")",
-                        ' ',
+                        " ",
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { color: "link", className: "hand", onClick: _this.getThreadDump },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "eye" })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Runnable"),
                             " ",
-                            metrics.gauges['jvm.threads.runnable.count'].value),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges['jvm.threads.runnable.count'].value, max: metrics.gauges['jvm.threads.count'].value, color: "success" },
+                            metrics.gauges["jvm.threads.runnable.count"].value),
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges["jvm.threads.runnable.count"].value, max: metrics.gauges["jvm.threads.count"].value, color: "success" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.threads.runnable.count'].value * 100) / metrics.gauges['jvm.threads.count'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.threads.runnable.count"].value * 100) /
+                                        metrics.gauges["jvm.threads.count"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%")),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Timed Waiting"),
                             " (",
-                            metrics.gauges['jvm.threads.timed_waiting.count'].value,
+                            metrics.gauges["jvm.threads.timed_waiting.count"].value,
                             ")"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges['jvm.threads.timed_waiting.count'].value, max: metrics.gauges['jvm.threads.count'].value, color: "warning" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges["jvm.threads.timed_waiting.count"].value, max: metrics.gauges["jvm.threads.count"].value, color: "warning" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.threads.timed_waiting.count'].value * 100) / metrics.gauges['jvm.threads.count'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.threads.timed_waiting.count"].value *
+                                        100) /
+                                        metrics.gauges["jvm.threads.count"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%")),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Waiting"),
                             " (",
-                            metrics.gauges['jvm.threads.waiting.count'].value,
+                            metrics.gauges["jvm.threads.waiting.count"].value,
                             ")"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges['jvm.threads.waiting.count'].value, max: metrics.gauges['jvm.threads.count'].value, color: "warning" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges["jvm.threads.waiting.count"].value, max: metrics.gauges["jvm.threads.count"].value, color: "warning" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.threads.waiting.count'].value * 100) / metrics.gauges['jvm.threads.count'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.threads.waiting.count"].value * 100) /
+                                        metrics.gauges["jvm.threads.count"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%")),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Blocked"),
                             " (",
-                            metrics.gauges['jvm.threads.blocked.count'].value,
+                            metrics.gauges["jvm.threads.blocked.count"].value,
                             ")"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges['jvm.threads.blocked.count'].value, max: metrics.gauges['jvm.threads.count'].value, color: "success" },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { animated: true, min: "0", value: metrics.gauges["jvm.threads.blocked.count"].value, max: metrics.gauges["jvm.threads.count"].value, color: "success" },
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['jvm.threads.blocked.count'].value * 100) / metrics.gauges['jvm.threads.count'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["jvm.threads.blocked.count"].value * 100) /
+                                        metrics.gauges["jvm.threads.count"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                 "%"))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { md: "4" },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Garbage collections"),
-                        _this.gaugeRow(metrics, 'Mark Sweep count', 'jvm.garbage.PS-MarkSweep.count'),
-                        _this.gaugeRow(metrics, 'Mark Sweep time', 'jvm.garbage.PS-MarkSweep.time'),
-                        _this.gaugeRow(metrics, 'Scavenge count', 'jvm.garbage.PS-Scavenge.count'),
-                        _this.gaugeRow(metrics, 'Scavenge time', 'jvm.garbage.PS-Scavenge.time')))))); };
+                        _this.gaugeRow(metrics, "Mark Sweep count", "jvm.garbage.PS-MarkSweep.count"),
+                        _this.gaugeRow(metrics, "Mark Sweep time", "jvm.garbage.PS-MarkSweep.time"),
+                        _this.gaugeRow(metrics, "Scavenge count", "jvm.garbage.PS-Scavenge.count"),
+                        _this.gaugeRow(metrics, "Scavenge time", "jvm.garbage.PS-Scavenge.time")))))); };
         return _this;
     }
     MetricsPage.prototype.componentDidMount = function () {
@@ -912,25 +951,25 @@ var MetricsPage = /** @class */ (function (_super) {
         return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", { className: "metrics-page-heading" }, "Application Metrics"),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
-                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { onClick: this.getMetrics, color: isFetching ? 'btn btn-danger' : 'btn btn-primary', disabled: isFetching },
+                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], { onClick: this.getMetrics, color: isFetching ? "btn btn-danger" : "btn btn-primary", disabled: isFetching },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], { icon: "sync" }),
                     "\u00A0 Refresh")),
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null),
-            metrics.gauges ? this.renderGauges(metrics) : '',
+            metrics.gauges ? this.renderGauges(metrics) : "",
             metrics.meters && metrics.timers ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { sm: "12" },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "HTTP requests (events per second)"),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null,
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Active requests:"),
-                        ' ',
+                        " ",
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.counters['com.codahale.metrics.servlet.InstrumentedFilter.activeRequests'].count, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] })),
-                        ' ',
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.counters["com.codahale.metrics.servlet.InstrumentedFilter.activeRequests"].count, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] })),
+                        " ",
                         "- ",
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Total requests:"),
-                        ' ',
+                        " ",
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }))),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: metrics.timers["com.codahale.metrics.servlet.InstrumentedFilter.requests"].count, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Table"], null,
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
@@ -950,39 +989,39 @@ var MetricsPage = /** @class */ (function (_super) {
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: 0 },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "OK"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count, value: metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].count, color: "success", animated: true })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers["com.codahale.metrics.servlet.InstrumentedFilter.requests"].count, value: metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"].count, color: "success", animated: true })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok'].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] }))),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.ok"].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] }))),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: 1 },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "Not Found"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count, value: metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].count, color: "success", animated: true })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers["com.codahale.metrics.servlet.InstrumentedFilter.requests"].count, value: metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"].count, color: "success", animated: true })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound'].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] }))),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.notFound"].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] }))),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: 2 },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, "Server Error"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count, value: metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].count, color: "success", animated: true })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.timers["com.codahale.metrics.servlet.InstrumentedFilter.requests"].count, value: metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"].count, color: "success", animated: true })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"].mean_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"].m1_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"].m5_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters['com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError'].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })))))))) : (''),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.meters["com.codahale.metrics.servlet.InstrumentedFilter.responseCodes.serverError"].m15_rate), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })))))))) : (""),
             servicesStats ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { sm: "12" },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Services statistics (time in millisecond)")),
@@ -1014,7 +1053,7 @@ var MetricsPage = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: servicesStats[key].p99 * 1024, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: servicesStats[key].max * 1024, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] })))); }))))) : (''),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: servicesStats[key].max * 1024, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] })))); }))))) : (""),
             cachesStats ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { sm: "12" },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Ehcache statistics"),
@@ -1030,10 +1069,10 @@ var MetricsPage = /** @class */ (function (_super) {
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, metrics.gauges[k + ".objects"].value),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, metrics.gauges[k + ".hits"].value),
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, metrics.gauges[k + ".misses"].value),
-                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, metrics.gauges[k + ".eviction-count"].value))); })))))) : (''),
+                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, metrics.gauges[k + ".eviction-count"].value))); })))))) : (""),
             metrics.gauges &&
-                metrics.gauges['HikariPool-1.pool.TotalConnections'] &&
-                metrics.gauges['HikariPool-1.pool.TotalConnections'].value > 0 ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
+                metrics.gauges["HikariPool-1.pool.TotalConnections"] &&
+                metrics.gauges["HikariPool-1.pool.TotalConnections"].value > 0 ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null,
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], { sm: "12" },
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "DataSource statistics (time in millisecond)"),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Table"], null,
@@ -1042,10 +1081,13 @@ var MetricsPage = /** @class */ (function (_super) {
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null,
                                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, "Usage"),
                                     "(",
-                                    metrics.gauges['HikariPool-1.pool.ActiveConnections'].value,
-                                    " /",
-                                    ' ',
-                                    metrics.gauges['HikariPool-1.pool.TotalConnections'].value,
+                                    metrics.gauges["HikariPool-1.pool.ActiveConnections"]
+                                        .value,
+                                    " ",
+                                    "/",
+                                    " ",
+                                    metrics.gauges["HikariPool-1.pool.TotalConnections"]
+                                        .value,
                                     ")"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "text-right" }, "Count"),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "text-right" }, "Mean"),
@@ -1058,26 +1100,29 @@ var MetricsPage = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", { key: "DB" },
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null,
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.gauges['HikariPool-1.pool.TotalConnections'].value, value: metrics.gauges['HikariPool-1.pool.ActiveConnections'].value },
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Progress"], { min: "0", max: metrics.gauges["HikariPool-1.pool.TotalConnections"]
+                                            .value, value: metrics.gauges["HikariPool-1.pool.ActiveConnections"]
+                                            .value },
                                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null,
-                                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges['HikariPool-1.pool.ActiveConnections'].value * 100) /
-                                                    metrics.gauges['HikariPool-1.pool.TotalConnections'].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
+                                            react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: (metrics.gauges["HikariPool-1.pool.ActiveConnections"].value *
+                                                    100) /
+                                                    metrics.gauges["HikariPool-1.pool.TotalConnections"].value, type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_WHOLE_NUMBER_FORMAT"] }),
                                             "%"))),
-                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" }, metrics.histograms['HikariPool-1.pool.Usage'].count),
+                                react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" }, metrics.histograms["HikariPool-1.pool.Usage"].count),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].mean), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].mean), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].min), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].min), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p50), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].p50), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p75), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].p75), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p95), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].p95), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].p99), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].p99), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })),
                                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", { className: "text-right" },
-                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms['HikariPool-1.pool.Usage'].max), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })))))))) : (''),
+                                    react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_jhipster__WEBPACK_IMPORTED_MODULE_4__["TextFormat"], { value: this.filterNaN(metrics.histograms["HikariPool-1.pool.Usage"].max), type: "number", format: app_config_constants__WEBPACK_IMPORTED_MODULE_6__["APP_TWO_DIGITS_AFTER_POINT_NUMBER_FORMAT"] })))))))) : (""),
             this.renderModal()));
     };
     return MetricsPage;
@@ -1323,7 +1368,7 @@ var UserManagementDetail = /** @class */ (function (_super) {
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", null,
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, user.login),
                         "\u00A0",
-                        user.activated ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "Activated") : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "Deactivated")),
+                        user.activated ? (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "success" }, "Activated")) : (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Badge"], { color: "danger" }, "Deactivated"))),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dt", null, "First Name"),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dd", null, user.firstName),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("dt", null, "Last Name"),
@@ -1411,7 +1456,7 @@ var UserManagementUpdate = /** @class */ (function (_super) {
             _this.handleClose();
         };
         _this.handleClose = function () {
-            _this.props.history.push('/admin/user-management');
+            _this.props.history.push("/admin/user-management");
         };
         return _this;
     }
@@ -1440,19 +1485,19 @@ var UserManagementUpdate = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { type: "text", className: "form-control", name: "login", validate: {
                                 required: {
                                     value: true,
-                                    errorMessage: 'Your username is required.'
+                                    errorMessage: "Your username is required."
                                 },
                                 pattern: {
-                                    value: '^[_.@A-Za-z0-9-]*$',
-                                    errorMessage: 'Your username can only contain letters and digits.'
+                                    value: "^[_.@A-Za-z0-9-]*$",
+                                    errorMessage: "Your username can only contain letters and digits."
                                 },
                                 minLength: {
                                     value: 1,
-                                    errorMessage: 'Your username is required to be at least 1 character.'
+                                    errorMessage: "Your username is required to be at least 1 character."
                                 },
                                 maxLength: {
                                     value: 50,
-                                    errorMessage: 'Your username cannot be longer than 50 characters.'
+                                    errorMessage: "Your username cannot be longer than 50 characters."
                                 }
                             }, value: user.login })),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
@@ -1460,7 +1505,7 @@ var UserManagementUpdate = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { type: "text", className: "form-control", name: "firstName", validate: {
                                 maxLength: {
                                     value: 50,
-                                    errorMessage: 'This field cannot be longer than {{ max }} characters.'
+                                    errorMessage: "This field cannot be longer than {{ max }} characters."
                                 }
                             }, value: user.firstName })),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
@@ -1468,7 +1513,7 @@ var UserManagementUpdate = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { type: "text", className: "form-control", name: "lastName", validate: {
                                 maxLength: {
                                     value: 50,
-                                    errorMessage: 'This field cannot be longer than {{ max }} characters.'
+                                    errorMessage: "This field cannot be longer than {{ max }} characters."
                                 }
                             }, value: user.lastName }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvFeedback"], null, "This field cannot be longer than 50 characters.")),
@@ -1476,24 +1521,25 @@ var UserManagementUpdate = /** @class */ (function (_super) {
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvField"], { name: "email", label: "Email", placeholder: "Your email", type: "email", validate: {
                                 required: {
                                     value: true,
-                                    errorMessage: 'Your email is required.'
+                                    errorMessage: "Your email is required."
                                 },
                                 email: {
-                                    errorMessage: 'Your email is invalid.'
+                                    errorMessage: "Your email is invalid."
                                 },
                                 minLength: {
                                     value: 5,
-                                    errorMessage: 'Your email is required to be at least 5 characters.'
+                                    errorMessage: "Your email is required to be at least 5 characters."
                                 },
                                 maxLength: {
                                     value: 254,
-                                    errorMessage: 'Your email cannot be longer than 50 characters.'
+                                    errorMessage: "Your email cannot be longer than 50 characters."
                                 }
                             }, value: user.email })),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], { check: true },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], null,
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvInput"], { type: "checkbox", name: "activated", value: user.activated }),
-                            " Activated")),
+                            " ",
+                            "Activated")),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvGroup"], null,
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Label"], { for: "authorities" }, "Language Key"),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_5__["AvInput"], { type: "select", className: "form-control", name: "authorities", value: user.authorities, multiple: true }, roles.map(function (role) { return (react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", { value: role, key: role }, role)); }))),
@@ -1563,11 +1609,13 @@ var UserManagement = /** @class */ (function (_super) {
         _this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(react_jhipster__WEBPACK_IMPORTED_MODULE_5__["getSortState"])(_this.props.location, app_shared_util_pagination_constants__WEBPACK_IMPORTED_MODULE_8__["ITEMS_PER_PAGE"]));
         _this.sort = function (prop) { return function () {
             _this.setState({
-                order: _this.state.order === 'asc' ? 'desc' : 'asc',
+                order: _this.state.order === "asc" ? "desc" : "asc",
                 sort: prop
             }, function () { return _this.sortUsers(); });
         }; };
-        _this.handlePagination = function (activePage) { return _this.setState({ activePage: activePage }, function () { return _this.sortUsers(); }); };
+        _this.handlePagination = function (activePage) {
+            return _this.setState({ activePage: activePage }, function () { return _this.sortUsers(); });
+        };
         _this.getUsers = function () {
             var _a = _this.state, activePage = _a.activePage, itemsPerPage = _a.itemsPerPage, sort = _a.sort, order = _a.order;
             _this.props.getUsers(activePage - 1, itemsPerPage, sort + "," + order);
@@ -1596,24 +1644,24 @@ var UserManagement = /** @class */ (function (_super) {
             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Table"], { responsive: true, striped: true },
                 react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null,
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null,
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('id') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("id") },
                             "ID",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('login') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("login") },
                             "Login",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('email') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("email") },
                             "Email",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Profiles"),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('createdDate') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("createdDate") },
                             "Created Date",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('lastModifiedBy') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("lastModifiedBy") },
                             "Last Modified By",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
-                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort('lastModifiedDate') },
+                        react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", { className: "hand", onClick: this.sort("lastModifiedDate") },
                             "Last Modified Date",
                             react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeIcon"], { icon: "sort" })),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))),
