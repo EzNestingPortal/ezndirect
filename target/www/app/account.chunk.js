@@ -27,7 +27,7 @@ var Routes = function (_a) {
 /* harmony default export */ __webpack_exports__["default"] = (Routes);
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\index.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\index.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/index.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/index.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
@@ -65,7 +65,7 @@ var PasswordPage = /** @class */ (function (_super) {
     function PasswordPage() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
-            password: ''
+            password: ""
         };
         _this.handleValidSubmit = function (event, values) {
             _this.props.savePassword(values.currentPassword, values.newPassword);
@@ -92,30 +92,42 @@ var PasswordPage = /** @class */ (function (_super) {
                         account.login),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvForm"], { id: "password-form", onValidSubmit: this.handleValidSubmit },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "currentPassword", label: "Current password", placeholder: "Current password", type: "password", validate: {
-                                required: { value: true, errorMessage: 'Your password is required.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your password is required."
+                                }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "newPassword", label: "New password", placeholder: "New password", type: "password", validate: {
-                                required: { value: true, errorMessage: 'Your password is required.' },
-                                minLength: { value: 4, errorMessage: 'Your password is required to be at least 4 characters.' },
-                                maxLength: { value: 50, errorMessage: 'Your password cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your password is required."
+                                },
+                                minLength: {
+                                    value: 4,
+                                    errorMessage: "Your password is required to be at least 4 characters."
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your password cannot be longer than 50 characters."
+                                }
                             }, onChange: this.updatePassword }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(app_shared_layout_password_password_strength_bar__WEBPACK_IMPORTED_MODULE_6__["default"], { password: this.state.password }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_3__["AvField"], { name: "confirmPassword", label: "New password confirmation", placeholder: "Confirm the new password", type: "password", validate: {
                                 required: {
                                     value: true,
-                                    errorMessage: 'Your confirmation password is required.'
+                                    errorMessage: "Your confirmation password is required."
                                 },
                                 minLength: {
                                     value: 4,
-                                    errorMessage: 'Your confirmation password is required to be at least 4 characters.'
+                                    errorMessage: "Your confirmation password is required to be at least 4 characters."
                                 },
                                 maxLength: {
                                     value: 50,
-                                    errorMessage: 'Your confirmation password cannot be longer than 50 characters.'
+                                    errorMessage: "Your confirmation password cannot be longer than 50 characters."
                                 },
                                 match: {
-                                    value: 'newPassword',
-                                    errorMessage: 'The password and its confirmation do not match!'
+                                    value: "newPassword",
+                                    errorMessage: "The password and its confirmation do not match!"
                                 }
                             } }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], { color: "success", type: "submit" }, "Save"))))));
@@ -134,7 +146,7 @@ var mapDispatchToProps = { getSession: app_shared_reducers_authentication__WEBPA
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(PasswordPage));
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\password\\password.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\password\\password.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/password/password.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/password/password.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
@@ -192,19 +204,46 @@ var SettingsPage = /** @class */ (function (_super) {
                         account.login),
                     react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvForm"], { id: "settings-form", onValidSubmit: this.handleValidSubmit },
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { className: "form-control", name: "firstName", label: "First Name", id: "firstName", placeholder: "Your first name", validate: {
-                                required: { value: true, errorMessage: 'Your first name is required.' },
-                                minLength: { value: 1, errorMessage: 'Your first name is required to be at least 1 character' },
-                                maxLength: { value: 50, errorMessage: 'Your first name cannot be longer than 50 characters' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your first name is required."
+                                },
+                                minLength: {
+                                    value: 1,
+                                    errorMessage: "Your first name is required to be at least 1 character"
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your first name cannot be longer than 50 characters"
+                                }
                             }, value: account.firstName }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { className: "form-control", name: "lastName", label: "Last Name", id: "lastName", placeholder: "Your last name", validate: {
-                                required: { value: true, errorMessage: 'Your last name is required.' },
-                                minLength: { value: 1, errorMessage: 'Your last name is required to be at least 1 character' },
-                                maxLength: { value: 50, errorMessage: 'Your last name cannot be longer than 50 characters' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your last name is required."
+                                },
+                                minLength: {
+                                    value: 1,
+                                    errorMessage: "Your last name is required to be at least 1 character"
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    errorMessage: "Your last name cannot be longer than 50 characters"
+                                }
                             }, value: account.lastName }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(availity_reactstrap_validation__WEBPACK_IMPORTED_MODULE_4__["AvField"], { name: "email", label: "Email", placeholder: "Your email", type: "email", validate: {
-                                required: { value: true, errorMessage: 'Your email is required.' },
-                                minLength: { value: 5, errorMessage: 'Your email is required to be at least 5 characters.' },
-                                maxLength: { value: 254, errorMessage: 'Your email cannot be longer than 50 characters.' }
+                                required: {
+                                    value: true,
+                                    errorMessage: "Your email is required."
+                                },
+                                minLength: {
+                                    value: 5,
+                                    errorMessage: "Your email is required to be at least 5 characters."
+                                },
+                                maxLength: {
+                                    value: 254,
+                                    errorMessage: "Your email cannot be longer than 50 characters."
+                                }
                             }, value: account.email }),
                         react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], { color: "primary", type: "submit" }, "Save"))))));
     };
@@ -222,7 +261,7 @@ var mapDispatchToProps = { getSession: app_shared_reducers_authentication__WEBPA
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(SettingsPage));
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\settings\\settings.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "D:\\jinkal\\work\\ezndirect\\src\\main\\webapp\\app\\modules\\account\\settings\\settings.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (true) { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } /* eslint-disable camelcase, no-undef */ var webpackExports = typeof __webpack_exports__ !== 'undefined' ? __webpack_exports__ : module.exports; /* eslint-enable camelcase, no-undef */ if (typeof webpackExports === 'function') { __REACT_HOT_LOADER__.register(webpackExports, 'module.exports', "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/settings/settings.tsx"); return; } /* eslint-disable no-restricted-syntax */ for (var key in webpackExports) { /* eslint-enable no-restricted-syntax */ if (!Object.prototype.hasOwnProperty.call(webpackExports, key)) { continue; } var namedExport = void 0; try { namedExport = webpackExports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "/Users/rmoha025/ezndirect/src/main/webapp/app/modules/account/settings/settings.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ })
