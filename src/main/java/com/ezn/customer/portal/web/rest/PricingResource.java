@@ -1,21 +1,24 @@
 package com.ezn.customer.portal.web.rest;
 
-import com.ezn.customer.portal.security.AuthoritiesConstants;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ezn.customer.portal.service.PricingService;
 import com.ezn.customer.portal.service.dto.PropertyMetaDataDTO;
 import com.ezn.customer.portal.service.dto.SubscriptionDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.parameters.P;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
+import com.ezn.customer.portal.service.dto.UserDTO;
 
 /**
  * REST controller for managing pricing.
@@ -28,11 +31,8 @@ public class PricingResource {
 
 
     private final PricingService pricingService;
-
-
-
+    
     public PricingResource(PricingService pricingService) {
-
         this.pricingService = pricingService;
     }
 
@@ -47,50 +47,22 @@ public class PricingResource {
     public ResponseEntity<List<SubscriptionDTO>> getPricing(HttpServletRequest request) {
         log.debug("in get pricing");
         PropertyMetaDataDTO propertyMetaDataDTO = new PropertyMetaDataDTO();
-        propertyMetaDataDTO.setLotSize(Integer.parseInt(request.getParameter("lotSize")));
-        propertyMetaDataDTO.setFloorSize(Integer.parseInt(request.getParameter("floorSize")));
+        propertyMetaDataDTO.setLawnSize(Integer.parseInt(request.getParameter("lawnSize")));
+        propertyMetaDataDTO.setPropertySize(Integer.parseInt(request.getParameter("propertySize")));
         propertyMetaDataDTO.setFloors(Integer.parseInt(request.getParameter("floors")));
-
-
 
         return new ResponseEntity<>(pricingService.getAvailablePlans(propertyMetaDataDTO),HttpStatus.OK);
     }
 
-
-
-
-//
-//    /**
-//     * GET /pricing : get pricing.
-//     *
-//     * @param property the pagination information
-//     * @return the ResponseEntity with status 200 (OK) and with body all users
-//     */
-//    @GetMapping("/pricing")
-//    @Timed
-//    @Secured(AuthoritiesConstants.ADMIN)
-//    public ResponseEntity<List<Pricing>> getPricing(Property property) {
-//        final Page<UserDTO> page = pricingService.getAllManagedUsers(pageable);
-//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-//    }
-//
-//
-//    /**
-//     * GET /pricing : get pricing.
-//     *
-//     * @param r the pagination information
-//     * @return the ResponseEntity with status 200 (OK) and with body all users
-//     */
-//    @GetMapping("/pricing")
-//    @Timed
-//    @Secured(AuthoritiesConstants.ADMIN)
-//    public ResponseEntity<List<UserDTO>> getPricing(Property property) {
-//        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
-//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-//    }
-
-
-
+    @PostMapping("/enroll") 
+    public ResponseEntity enroll(@Valid @RequestBody UserDTO userDTO) throws Exception{
+        log.debug("in enroll");
+        int status = pricingService.enroll(userDTO);
+        
+        if(status == 200)
+            return new ResponseEntity(HttpStatus.OK);
+        else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }    
+    }
 }

@@ -60,16 +60,16 @@ export default class Header extends React.Component<
       <div id="app-header">
         {this.renderDevRibbon()}
         <LoadingBar className="loading-bar" />
-        <Navbar dark expand="sm" fixed="top" className="jh-navbar">
-          <NavbarToggler aria-label="Menu" onClick={this.toggleMenu} />
+        <Navbar light expand="sm" fixed="top" className="jh-navbar">
+          {/* <NavbarToggler aria-label="Menu" onClick={this.toggleMenu} /> */}
           <Brand />
           <Collapse isOpen={this.state.menuOpen} navbar>
             <Nav id="header-tabs" className="ml-auto" navbar>
-              <Home />
+              {/* <Home />
               {isAuthenticated && <EntitiesMenu />}
               {isAuthenticated &&
                 isAdmin && <AdminMenu showSwagger={isSwaggerEnabled} />}
-              <AccountMenu isAuthenticated={isAuthenticated} />
+              <AccountMenu isAuthenticated={isAuthenticated} /> */}
             </Nav>
           </Collapse>
         </Navbar>

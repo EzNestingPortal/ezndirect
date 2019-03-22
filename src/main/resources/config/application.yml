@@ -107,7 +107,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: ezncust@localhost
+        from: support@eznesting.com
     swagger:
         default-include-pattern: /api/.*
         title: ezncust API

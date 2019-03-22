@@ -31,7 +31,9 @@ import passwordReset, {
 } from "app/modules/account/password-reset/password-reset.reducer";
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
-import pricing, { PricingState } from "app/modules/pricing/pricing.reducer";
+/* import pricing, { PricingState } from "app/modules/pricing/pricing.reducer"; */
+
+import pricing, { PricingState } from "app/modules/pricing2/pricing2.reducer";
 
 export interface IRootState {
   readonly authentication: AuthenticationState;

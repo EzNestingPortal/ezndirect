@@ -1,0 +1,17 @@
+{
+  "userid": "knksharma@gmail.com",
+  "lawnSize": 100,
+  "propertySize": 200,
+  "floors": 1,
+  "address1": "4704, Towne Sqaure Dr;",
+  "address2": {},
+  "city": "plano",
+  "state": "tx",
+  "zip": "75024",
+  "country": "usa",
+  "serviceStartDate": "2019-01-23T20:12:09.836Z",
+  "lastMowingDate": "2019-01-23T20:12:09.836Z",
+  "referral": "www.google.com",
+  "cornerLot": "No",
+  "notes": {}
+}

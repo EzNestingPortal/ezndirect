@@ -1,36 +1,41 @@
-import 'react-toastify/dist/ReactToastify.css';
-import './app.scss';
+import "react-toastify/dist/ReactToastify.min.css";
+import "./app.scss";
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { Card } from 'reactstrap';
-import { HashRouter as Router } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import React from "react";
+import { connect } from "react-redux";
+import { Card } from "reactstrap";
+import { HashRouter as Router } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
-import { getProfile } from 'app/shared/reducers/application-profile';
-import Header from 'app/shared/layout/header/header';
-import Footer from 'app/shared/layout/footer/footer';
-import { hasAnyAuthority } from 'app/shared/auth/private-route';
-import ErrorBoundary from 'app/shared/error/error-boundary';
-import { AUTHORITIES } from 'app/config/constants';
-import AppRoutes from 'app/routes';
+import { IRootState } from "app/shared/reducers";
+import { getSession } from "app/shared/reducers/authentication";
+import { getProfile } from "app/shared/reducers/application-profile";
+import Header from "app/shared/layout/header/header";
+import Footer from "app/shared/layout/footer/footer";
+import { hasAnyAuthority } from "app/shared/auth/private-route";
+import ErrorBoundary from "app/shared/error/error-boundary";
+import { AUTHORITIES } from "app/config/constants";
+import AppRoutes from "app/routes";
 
 export interface IAppProps extends StateProps, DispatchProps {}
 
 export class App extends React.Component<IAppProps> {
   componentDidMount() {
-    this.props.getSession();
-    this.props.getProfile();
+    //this.props.getSession();
+    //this.props.getProfile();
   }
 
   render() {
-    const paddingTop = '60px';
+    const paddingTop = "130px";
+    const backgroundImage = "content/images/bag.jpg";
     return (
       <Router>
-        <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+        <div className="app-container hipster" style={{ paddingTop }}>
+          <ToastContainer
+            position={toast.POSITION.TOP_CENTER}
+            className="toastify-container toastZIndex"
+            toastClassName="toastify-toast"
+          />
           <ErrorBoundary>
             <Header
               isAuthenticated={this.props.isAuthenticated}
@@ -40,12 +45,15 @@ export class App extends React.Component<IAppProps> {
               isSwaggerEnabled={this.props.isSwaggerEnabled}
             />
           </ErrorBoundary>
-          <div className="container-fluid view-container" id="app-view-container">
-            <Card className="jh-card">
-              <ErrorBoundary>
-                <AppRoutes />
-              </ErrorBoundary>
-            </Card>
+
+          <div
+            className="container-fluid view-container"
+            id="app-view-container"
+          >
+            <ErrorBoundary>
+              <AppRoutes />
+            </ErrorBoundary>
+
             <Footer />
           </div>
         </div>
@@ -54,9 +62,15 @@ export class App extends React.Component<IAppProps> {
   }
 }
 
-const mapStateToProps = ({ authentication, applicationProfile }: IRootState) => ({
-  isAuthenticated: authentication.isAuthenticated,
-  isAdmin: hasAnyAuthority(authentication.account.authorities, [AUTHORITIES.ADMIN]),
+const mapStateToProps = ({
+  authentication,
+  applicationProfile
+}: IRootState) => ({
+  //isAuthenticated: authentication.isAuthenticated,
+  isAuthenticated: true,
+  isAdmin: hasAnyAuthority(authentication.account.authorities, [
+    AUTHORITIES.ADMIN
+  ]),
   ribbonEnv: applicationProfile.ribbonEnv,
   isInProduction: applicationProfile.inProduction,
   isSwaggerEnabled: applicationProfile.isSwaggerEnabled

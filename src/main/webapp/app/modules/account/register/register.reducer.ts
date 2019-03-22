@@ -1,16 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import {
+  REQUEST,
+  SUCCESS,
+  FAILURE
+} from "app/shared/reducers/action-type.util";
 
 export const ACTION_TYPES = {
-  CREATE_ACCOUNT: 'register/CREATE_ACCOUNT',
-  RESET: 'register/RESET'
+  DEFAULT_UPDATE: "register/DEFAULT_PASSWORD_UPDATE",
+  RESET: "register/RESET"
 };
 
 const initialState = {
   loading: false,
-  registrationSuccess: false,
-  registrationFailure: false,
+  defaultUpdateSuccess: false,
+  defaultUpdateFailure: false,
   errorMessage: null
 };
 
@@ -19,21 +23,21 @@ export type RegisterState = Readonly<typeof initialState>;
 // Reducer
 export default (state: RegisterState = initialState, action): RegisterState => {
   switch (action.type) {
-    case REQUEST(ACTION_TYPES.CREATE_ACCOUNT):
+    case REQUEST(ACTION_TYPES.DEFAULT_UPDATE):
       return {
         ...state,
         loading: true
       };
-    case FAILURE(ACTION_TYPES.CREATE_ACCOUNT):
+    case FAILURE(ACTION_TYPES.DEFAULT_UPDATE):
       return {
         ...initialState,
-        registrationFailure: true,
+        defaultUpdateFailure: true,
         errorMessage: action.payload.response.data.errorKey
       };
-    case SUCCESS(ACTION_TYPES.CREATE_ACCOUNT):
+    case SUCCESS(ACTION_TYPES.DEFAULT_UPDATE):
       return {
         ...initialState,
-        registrationSuccess: true
+        defaultUpdateSuccess: true
       };
     case ACTION_TYPES.RESET:
       return {
@@ -45,11 +49,21 @@ export default (state: RegisterState = initialState, action): RegisterState => {
 };
 
 // Actions
-export const handleRegister = (login, email, password, langKey = 'en') => ({
-  type: ACTION_TYPES.CREATE_ACCOUNT,
-  payload: axios.post('/api/register', { login, email, password, langKey }),
+export const handleRegister = (
+  username,
+  email,
+  newPassword,
+  langKey = "EN"
+) => ({
+  type: ACTION_TYPES.DEFAULT_UPDATE,
+  payload: axios.post("/api/account/update-default-password", {
+    email,
+    newPassword,
+    langKey
+  }),
   meta: {
-    successMessage: '<strong>Registration saved!</strong> Please check your email for confirmation.'
+    successMessage:
+      "<strong>Registration saved!</strong> Please check your email for confirmation."
   }
 });
 

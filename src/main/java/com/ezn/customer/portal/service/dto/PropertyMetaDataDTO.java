@@ -5,22 +5,24 @@ package com.ezn.customer.portal.service.dto;
  */
 public class PropertyMetaDataDTO {
 
-    private int lotSize;
+    private int lawnSize;
+    private int propertySize;
+    private int floors;
 
-    public int getLotSize() {
-        return lotSize;
+    public int getLawnSize() {
+        return lawnSize;
     }
 
-    public void setLotSize(int lotSize) {
-        this.lotSize = lotSize;
+    public void setLawnSize(int lawnSize) {
+        this.lawnSize = lawnSize;
     }
 
-    public int getFloorSize() {
-        return floorSize;
+    public int getPropertySize() {
+        return propertySize;
     }
 
-    public void setFloorSize(int floorSize) {
-        this.floorSize = floorSize;
+    public void setPropertySize(int propertySize) {
+        this.propertySize = propertySize;
     }
 
     public int getFloors() {
@@ -31,16 +33,14 @@ public class PropertyMetaDataDTO {
         this.floors = floors;
     }
 
-    private int floorSize;
-    private int floors;
 
 
 
     @Override
     public String toString() {
         return "PropertyMetaDataDTO{" +
-            "lotSize='" + lotSize + '\'' +
-            ", floorSize='" + floorSize + '\'' +
+            "lotSize='" + lawnSize + '\'' +
+            ", floorSize='" + propertySize + '\'' +
             ", floors='" + floors + '\'' +
             "}";
     }

@@ -1,34 +1,46 @@
 package com.ezn.customer.portal.web.rest;
 
-import com.ezn.customer.portal.config.Constants;
-import com.codahale.metrics.annotation.Timed;
-import com.ezn.customer.portal.domain.User;
-import com.ezn.customer.portal.repository.UserRepository;
-import com.ezn.customer.portal.security.AuthoritiesConstants;
-import com.ezn.customer.portal.service.MailService;
-import com.ezn.customer.portal.service.UserService;
-import com.ezn.customer.portal.service.dto.UserDTO;
-import com.ezn.customer.portal.web.rest.errors.BadRequestAlertException;
-import com.ezn.customer.portal.web.rest.errors.EmailAlreadyUsedException;
-import com.ezn.customer.portal.web.rest.errors.LoginAlreadyUsedException;
-import com.ezn.customer.portal.web.rest.util.HeaderUtil;
-import com.ezn.customer.portal.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import com.codahale.metrics.annotation.Timed;
+import com.ezn.customer.portal.config.Constants;
+import com.ezn.customer.portal.domain.User;
+import com.ezn.customer.portal.repository.UserRepository;
+import com.ezn.customer.portal.security.AuthoritiesConstants;
+import com.ezn.customer.portal.service.MailService;
+import com.ezn.customer.portal.service.UserService;
+import com.ezn.customer.portal.service.dto.PropertyDTO;
+import com.ezn.customer.portal.service.dto.UserDTO;
+import com.ezn.customer.portal.web.rest.errors.BadRequestAlertException;
+import com.ezn.customer.portal.web.rest.errors.EmailAlreadyUsedException;
+import com.ezn.customer.portal.web.rest.errors.LoginAlreadyUsedException;
+import com.ezn.customer.portal.web.rest.util.HeaderUtil;
+import com.ezn.customer.portal.web.rest.util.PaginationUtil;
 
 /**
  * REST controller for managing users.
@@ -174,6 +186,8 @@ public class UserResource {
                 .map(UserDTO::new));
     }
 
+    
+      
     /**
      * DELETE /users/:login : delete the "login" User.
      *

@@ -2,19 +2,26 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import { Row, Col, Alert, Button } from "reactstrap";
-
+import { Container, Row, Col, Button } from "reactstrap";
+import { Redirect } from "react-router";
 import PasswordStrengthBar from "app/shared/layout/password/password-strength-bar";
-import { IRootState } from "app/shared/reducers";
+
+import { RouteComponentProps, Link } from "react-router-dom";
+
 import {
   handleRegister,
   reset
 } from "app/modules/account/register/register.reducer";
 
-export type IRegisterProps = DispatchProps;
+import "./register.scss";
+
+export interface IRegisterProps extends DispatchProps, RouteComponentProps<{}> {
+  defaultUpdateSuccess: boolean;
+}
 
 export interface IRegisterState {
   password: string;
+  defaultUpdateSuccess: boolean;
 }
 
 export class RegisterPage extends React.Component<
@@ -22,7 +29,8 @@ export class RegisterPage extends React.Component<
   IRegisterState
 > {
   state: IRegisterState = {
-    password: ""
+    password: "",
+    defaultUpdateSuccess: false
   };
 
   componentWillUnmount() {
@@ -43,8 +51,12 @@ export class RegisterPage extends React.Component<
   };
 
   render() {
+    if (this.props.defaultUpdateSuccess === true) {
+      return <Redirect to="/thank-you" />;
+    }
+
     return (
-      <div>
+      <Container className="formContainer">
         <Row className="justify-content-center">
           <Col md="8">
             <h1 id="register-title">Registration</h1>
@@ -53,11 +65,11 @@ export class RegisterPage extends React.Component<
         <Row className="justify-content-center">
           <Col md="8">
             <AvForm id="register-form" onValidSubmit={this.handleValidSubmit}>
-              <AvField
+              {/* <AvField
                 name="username"
                 label="Username"
                 placeholder="Your username"
-                validate={{
+                validate={{   
                   required: {
                     value: true,
                     errorMessage: "Your username is required."
@@ -78,12 +90,14 @@ export class RegisterPage extends React.Component<
                       "Your username cannot be longer than 50 characters."
                   }
                 }}
-              />
+              /> */}
               <AvField
                 name="email"
                 label="Email"
                 placeholder="Your email"
                 type="email"
+                value={localStorage.getItem("email")}
+                readonly="true"
                 validate={{
                   required: {
                     value: true,
@@ -104,60 +118,69 @@ export class RegisterPage extends React.Component<
               <AvField
                 name="firstPassword"
                 label="New password"
-                placeholder="New password"
+                placeholder="Password"
                 type="password"
                 onChange={this.updatePassword}
-                validate={{
-                  required: {
-                    value: true,
-                    errorMessage: "Your password is required."
-                  },
-                  minLength: {
-                    value: 4,
-                    errorMessage:
-                      "Your password is required to be at least 4 characters."
-                  },
-                  maxLength: {
-                    value: 50,
-                    errorMessage:
-                      "Your password cannot be longer than 50 characters."
-                  }
-                }}
+                validate={
+                  !this.state.password.length
+                    ? ""
+                    : {
+                        required: {
+                          value: true,
+                          errorMessage: "Your password is required."
+                        },
+                        minLength: {
+                          value: 4,
+                          errorMessage:
+                            "Your password is required to be at least 4 characters."
+                        },
+                        maxLength: {
+                          value: 50,
+                          errorMessage:
+                            "Your password cannot be longer than 50 characters."
+                        }
+                      }
+                }
               />
               <PasswordStrengthBar password={this.state.password} />
               <AvField
                 name="secondPassword"
-                label="New password confirmation"
+                label="Confirm Password"
                 placeholder="Confirm the new password"
                 type="password"
-                validate={{
-                  required: {
-                    value: true,
-                    errorMessage: "Your confirmation password is required."
-                  },
-                  minLength: {
-                    value: 4,
-                    errorMessage:
-                      "Your confirmation password is required to be at least 4 characters."
-                  },
-                  maxLength: {
-                    value: 50,
-                    errorMessage:
-                      "Your confirmation password cannot be longer than 50 characters."
-                  },
-                  match: {
-                    value: "firstPassword",
-                    errorMessage:
-                      "The password and its confirmation do not match!"
-                  }
-                }}
+                validate={
+                  !this.state.password.length
+                    ? ""
+                    : {
+                        required: {
+                          value: true,
+                          errorMessage:
+                            "Your confrimation password is required."
+                        },
+                        minLength: {
+                          value: 4,
+                          errorMessage:
+                            "Your confirmation password is required to be at least 4 characters."
+                        },
+                        maxLength: {
+                          value: 50,
+                          errorMessage:
+                            "Your confirmation password cannot be longer than 50 characters."
+                        },
+                        match: {
+                          value: "firstPassword",
+                          errorMessage:
+                            "The password and its confirmation do not match!"
+                        }
+                      }
+                }
               />
               <Button id="register-submit" color="primary" type="submit">
-                Register
+                Continue
               </Button>
             </AvForm>
             <p>&nbsp;</p>
-            <Alert color="warning">
+            {/* <Alert color="warning">
               <span>If you want to</span>
               <a className="alert-link"> sign in</a>
               <span>
@@ -165,18 +188,24 @@ export class RegisterPage extends React.Component<
                 <br />- Administrator (login="admin" and password="admin")
                 <br />- User (login="user" and password="user").
               </span>
-            </Alert>
+            </Alert> */}
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    defaultUpdateSuccess: state.register.defaultUpdateSuccess
+  };
+};
 
 const mapDispatchToProps = { handleRegister, reset };
 type DispatchProps = typeof mapDispatchToProps;
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RegisterPage);

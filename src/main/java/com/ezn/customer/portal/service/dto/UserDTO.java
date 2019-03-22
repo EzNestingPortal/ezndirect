@@ -1,17 +1,21 @@
 package com.ezn.customer.portal.service.dto;
 
-import com.ezn.customer.portal.config.Constants;
-
-import com.ezn.customer.portal.domain.Authority;
-import com.ezn.customer.portal.domain.User;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
-import javax.validation.constraints.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.beans.BeanUtils;
+
+import com.ezn.customer.portal.config.Constants;
+import com.ezn.customer.portal.domain.Authority;
+import com.ezn.customer.portal.domain.Property;
+import com.ezn.customer.portal.domain.User;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -20,7 +24,7 @@ public class UserDTO {
 
     private Long id;
 
-    @NotBlank
+    //@NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
@@ -30,7 +34,10 @@ public class UserDTO {
 
     @Size(max = 50)
     private String lastName;
-
+    
+    @Size(max = 10)
+    private String mobileNo;
+    
     @Email
     @Size(min = 5, max = 254)
     private String email;
@@ -52,6 +59,8 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
+    
+    private List<PropertyDTO> properties;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -62,6 +71,7 @@ public class UserDTO {
         this.login = user.getLogin();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+        this.mobileNo = user.getMobileNo();
         this.email = user.getEmail();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
@@ -73,6 +83,14 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        
+        List<Property> properties = user.getProperties();
+                
+        List<PropertyDTO> propertyDTOS = new ArrayList<PropertyDTO>(properties.size());
+    	for (int i = 0; i < properties.size(); i++) {
+    		BeanUtils.copyProperties(properties.get(i), propertyDTOS.get(i));
+    	}
+        this.properties = propertyDTOS;
     }
 
     public Long getId() {
@@ -106,8 +124,16 @@ public class UserDTO {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    
+    public String getMobileNo() {
+		return mobileNo;
+	}
 
-    public String getEmail() {
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getEmail() {
         return email;
     }
 
@@ -179,7 +205,15 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-    @Override
+    public List<PropertyDTO> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<PropertyDTO> properties) {
+		this.properties = properties;
+	}
+
+	@Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +

@@ -18,6 +18,7 @@ public class ManagedUserVM extends UserDTO {
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
     }
+  
 
     public String getPassword() {
         return password;
@@ -29,7 +30,7 @@ public class ManagedUserVM extends UserDTO {
 
     @Override
     public String toString() {
-        return "ManagedUserVM{" +
+        return "ManagedUserVM{ " +
             "} " + super.toString();
     }
 }

@@ -1,0 +1,29 @@
+.checkoutContainer {
+  background: white;
+}
+
+.checkoutComp {
+  text-align: center;
+}
+
+.form-control1 > input {
+  display: block;
+  width: 100%;
+  padding: 0.575rem 0.85rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.15rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control1 > input :focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}

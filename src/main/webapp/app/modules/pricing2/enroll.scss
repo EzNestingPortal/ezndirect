@@ -1,0 +1,53 @@
+.formContainer {
+  background-color: whitesmoke;
+  color: black;
+  padding: 10px;
+}
+
+.buttonpanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+input[type="date"]::before {
+  color: gray;
+  content: attr(placeholder);
+}
+input[type="date"] {
+  color: #ffffff;
+}
+input[type="date"]:focus,
+input[type="date"]:valid {
+  color: #495057;
+}
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  content: "" !important;
+  display: none;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+}
+
+input#lastMowingDate {
+  min-height: 2.375rem;
+}
+input#serviceStartDate {
+  min-height: 2.375rem;
+}
+
+.modal {
+  display: block !important; /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+  overflow-y: initial !important;
+}
+.modal-body {
+  height: 350px;
+  overflow-y: auto;
+}

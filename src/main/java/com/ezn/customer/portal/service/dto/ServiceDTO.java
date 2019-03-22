@@ -1,7 +1,6 @@
 package com.ezn.customer.portal.service.dto;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * A DTO representing a Plan, with his authorities.
@@ -19,7 +18,9 @@ public class ServiceDTO {
     private Boolean recurring;
     private Boolean oneTime;
     private Boolean canRequestOneTime;
-
+    private Boolean free;
+    private Boolean visible = true;
+    
     public String getServiceId() {
         return serviceId;
     }
@@ -108,7 +109,21 @@ public class ServiceDTO {
         this.canRequestOneTime = canRequestOneTime;
     }
 
-
+    public void setFree(Boolean free) {
+        this.free = free;
+    }
+    
+    public Boolean isFree() {
+        return free;
+    }
+    
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
+    
+    public Boolean isVisible() {
+        return visible;
+    }
 
 
     @Override
@@ -125,6 +140,7 @@ public class ServiceDTO {
             ", recurring=" + recurring + '\'' +
             ", oneTime=" + oneTime + '\'' +
             ", canRequestOneTime=" + canRequestOneTime + '\'' +
+            ", free=" + free + '\'' +
             "}";
     }
 }

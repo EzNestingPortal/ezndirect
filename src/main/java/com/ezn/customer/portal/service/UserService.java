@@ -1,14 +1,16 @@
 package com.ezn.customer.portal.service;
 
-import com.ezn.customer.portal.domain.Authority;
-import com.ezn.customer.portal.domain.User;
-import com.ezn.customer.portal.repository.AuthorityRepository;
-import com.ezn.customer.portal.config.Constants;
-import com.ezn.customer.portal.repository.UserRepository;
-import com.ezn.customer.portal.security.AuthoritiesConstants;
-import com.ezn.customer.portal.security.SecurityUtils;
-import com.ezn.customer.portal.service.util.RandomUtil;
-import com.ezn.customer.portal.service.dto.UserDTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +19,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.ezn.customer.portal.web.rest.errors.InvalidPasswordException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.ezn.customer.portal.config.Constants;
+import com.ezn.customer.portal.domain.Authority;
+import com.ezn.customer.portal.domain.Property;
+import com.ezn.customer.portal.domain.User;
+import com.ezn.customer.portal.repository.AuthorityRepository;
+import com.ezn.customer.portal.repository.PropertyRepository;
+import com.ezn.customer.portal.repository.UserRepository;
+import com.ezn.customer.portal.security.AuthoritiesConstants;
+import com.ezn.customer.portal.security.SecurityUtils;
+import com.ezn.customer.portal.service.dto.PropertyDTO;
+import com.ezn.customer.portal.service.dto.UserDTO;
+import com.ezn.customer.portal.service.util.RandomUtil;
+import com.ezn.customer.portal.web.rest.errors.BadRequestAlertException;
+import com.ezn.customer.portal.web.rest.errors.InvalidPasswordException;
 
 /**
  * Service class for managing users.
@@ -40,13 +51,16 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
+    
+    private final PropertyRepository propertyRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, PropertyRepository propertyRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.propertyRepository = propertyRepository;
         this.cacheManager = cacheManager;
     }
 
@@ -88,7 +102,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password)   {
 
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
@@ -97,8 +111,11 @@ public class UserService {
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
+        newUser.setMobileNo(userDTO.getMobileNo());
         newUser.setEmail(userDTO.getEmail());
         newUser.setImageUrl(userDTO.getImageUrl());
+        //Defaulting to EN
+        userDTO.setLangKey("en");
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
         newUser.setActivated(false);
@@ -107,6 +124,57 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
+        
+        List<Property> properties = new ArrayList<Property>();
+        Property property = new Property();
+        List<PropertyDTO> propertiesDTO = userDTO.getProperties();
+        PropertyDTO propertyDTO = propertiesDTO.get(0);
+        property.setEmail(userDTO.getEmail());
+        property.setUser(newUser);
+        property.setPropertySize(propertyDTO.getPropertySize());
+        property.setLawnSize(propertyDTO.getLawnSize());
+        property.setFloors(propertyDTO.getFloors());
+        property.setPlanId(propertyDTO.getPlanId());
+        property.setPlanType(propertyDTO.getPlanType());
+        property.setActualPrice(propertyDTO.getActualPrice());
+    	property.setDiscountPrice(propertyDTO.getDiscountPrice());
+        property.setAddress1(propertyDTO.getAddress1());
+        property.setAddress2(propertyDTO.getAddress2());
+        property.setCity(propertyDTO.getCity());
+        property.setState(propertyDTO.getState());
+        property.setZip(propertyDTO.getZip());
+        property.setCountry(propertyDTO.getCountry());
+        property.setReferralCode(propertyDTO.getReferralCode());
+        property.setNotes(propertyDTO.getNotes());
+        property.setCornerLot(propertyDTO.isCornerLot());
+        property.setFlowerBed(propertyDTO.isFlowerBed());
+        property.setQuarterlyPestControl(propertyDTO.isQuarterlyPestControl());
+    	property.setAgree(propertyDTO.isAgree());
+        
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+    	String lastServiceDate = propertyDTO.getLastServiceDate();
+    	if(lastServiceDate != null && !lastServiceDate.isEmpty()) {
+    		try {
+    			property.setLastServiceDate(format.parse(lastServiceDate));
+    		} catch(ParseException pe) {
+            	log.error("Invalid date format");
+            	throw new BadRequestAlertException("Invalid Last Service Date Format", "lastServiceDate", "");
+            }
+    	}
+           
+        String serviceStartDate = propertyDTO.getServiceStartDate();
+    	if(serviceStartDate != null && !serviceStartDate.isEmpty()) {
+    		try {
+    			property.setServiceStartDate(format.parse(serviceStartDate));
+    		} catch(ParseException pe) {
+            	log.error("Invalid date format");
+            	throw new BadRequestAlertException("Invalid Service Start Date Format", "serviceStartDate", "");
+            }
+    	}
+        properties.add(property);
+        
+        newUser.setProperties(properties);
+        
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
@@ -224,6 +292,14 @@ public class UserService {
             });
     }
 
+    public void updatePassword(String emailId, String newPassword) {
+        User user = userRepository.findUserByEmailIgnoreCase(emailId);
+        String encryptedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encryptedPassword);
+        this.clearUserCaches(user);
+        log.debug("Updated default password for User: {}", user);
+    }
+
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
@@ -243,6 +319,8 @@ public class UserService {
     public Optional<User> getUserWithAuthorities() {
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
     }
+    
+   
 
     /**
      * Not activated users should be automatically deleted after 3 days.

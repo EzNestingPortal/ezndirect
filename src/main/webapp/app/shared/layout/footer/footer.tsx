@@ -1,14 +1,14 @@
-import './footer.scss';
+import "./footer.scss";
 
-import React from 'react';
+import React from "react";
 
-import { Col, Row } from 'reactstrap';
+import { Col, Row } from "reactstrap";
 
 const Footer = props => (
   <div className="footer page-content">
     <Row>
       <Col md="12">
-        <p>Your footer</p>
+        <p>2019 © Copyright EZNesting</p>
       </Col>
     </Row>
   </div>

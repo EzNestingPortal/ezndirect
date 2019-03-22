@@ -15,14 +15,15 @@ public class SubscriptionDTO {
     private Double yearlySavings;
     private String idleMonths;
     private AddressDTO address;
-    private List<ServiceDTO> services;
-    private Double discountedPrice;
-
-    public Double getDiscountedPrice() {
+    private List<AvailableServiceDTO> services;
+    private Float discountedPrice;
+    private Float freeDiscount;
+    
+    public Float getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Double discountedPrice) {
+    public void setDiscountedPrice(Float discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 
@@ -93,15 +94,21 @@ public class SubscriptionDTO {
         this.address = address;
     }
 
-    public List<ServiceDTO> getServices() {
+    public List<AvailableServiceDTO> getServices() {
         return services;
     }
 
-    public void setServices(List<ServiceDTO> services) {
+    public void setServices(List<AvailableServiceDTO> services) {
         this.services = services;
     }
 
+    public void setFreeDiscount(Float freeDiscount)     {
+        this.freeDiscount = freeDiscount;
+    }
 
+    public Float getFreeDiscount() {
+        return freeDiscount;
+    }
 
     @Override
     public String toString() {

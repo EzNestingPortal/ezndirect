@@ -56,14 +56,12 @@ public class AccountResource {
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        if (!checkPasswordLength(managedUserVM.getPassword())) {
-            throw new InvalidPasswordException();
-        }
-        userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
+    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) throws BadRequestAlertException{
+        managedUserVM.setLogin(managedUserVM.getEmail());
+        userRepository.findOneByLogin(managedUserVM.getEmail().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        User user = userService.registerUser(managedUserVM, "default123");
+        //mailService.sendActivationEmail(user);
     }
 
     /**
@@ -179,6 +177,32 @@ public class AccountResource {
 
         if (!user.isPresent()) {
             throw new InternalServerErrorException("No user was found for this reset key");
+        }
+    }
+
+    /**
+     * POST  /register : register the user.
+     *
+     * @param managedUserVM the managed user View Model
+     * @throws InvalidPasswordException 400 (Bad Request) if the password is incorrect
+     * @throws EmailAlreadyUsedException 400 (Bad Request) if the email is already used
+     * @throws LoginAlreadyUsedException 400 (Bad Request) if the login is already used
+     */
+    @PostMapping("/account/update-default-password")
+    @Timed
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateAccountWithPassword(@RequestBody PasswordChangeDTO passwordChangeDto) {
+    	User existingUser = userRepository.findUserByEmailIgnoreCase(passwordChangeDto.getEmail());
+    	log.debug("Existing User :: {}", existingUser);
+    	
+        if(passwordChangeDto.getNewPassword() != null && !passwordChangeDto.getNewPassword().isEmpty()) {
+            if (!checkPasswordLength(passwordChangeDto.getNewPassword())) {
+                throw new InvalidPasswordException();
+            }
+            userService.updatePassword(passwordChangeDto.getEmail(), passwordChangeDto.getNewPassword());
+            mailService.sendNewPasswordEmail(existingUser);
+        } else {
+        	mailService.sendDefaultPasswordEmail(existingUser);
         }
     }
 
