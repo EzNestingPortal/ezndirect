@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { StripeProvider } from "react-stripe-elements";
-import { Container, Row, Col } from "reactstrap";
 
 import ThanksCheckout from "app/modules/pricing2/ThanksCheckout";
 
@@ -16,7 +15,7 @@ class Thanks extends Component<IEnrollProps> {
   }
   render() {
     return (
-      <StripeProvider apiKey="pk_test_QseBPReeIxUM1y6tvGHv3VYL">
+      <StripeProvider apiKey="pk_live_KSvXHLeXD1qJ1JO6AgqhqhsP">
         <ThanksCheckout />
       </StripeProvider>
     );

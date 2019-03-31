@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-
 import { connect } from "react-redux";
 import { withRouter, Redirect, RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
@@ -57,10 +55,10 @@ class Pricing extends Component<IPricingProps, IPricingState> {
   state: IPricingState = {
     pricingForm: {
       lawnSize: {
-        value: "1500"
+        value: "3000"
       },
       propertySize: {
-        value: "1500"
+        value: "2500"
       },
       floors: {
         value: "1"
@@ -73,7 +71,7 @@ class Pricing extends Component<IPricingProps, IPricingState> {
 
   constructor(props) {
     super(props);
-    this.props.handleGetMyPrice(1500, 1500, 1);
+    this.props.handleGetMyPrice(3000, 2500, 1);
     this.showMoreDetails = this.showMoreDetails.bind(this);
   }
 
@@ -197,18 +195,19 @@ class Pricing extends Component<IPricingProps, IPricingState> {
                 id="lawnSize"
                 onChange={event => this.inputChangedHandler(event, "lawnSize")}
               >
-                <option value="1500">Less than 1500 Sq. Ft.</option>
-                <option value="3000">1501 Sq. Ft. to 3000 Sq. Ft.</option>
-                <option value="4000">3001 Sq. Ft. to 4000 Sq. Ft.</option>
-                <option value="5000">4001 Sq. Ft. to 5000 Sq. Ft.</option>
-                <option value="6500">5001 Sq. Ft. to 6500 Sq. Ft.</option>
-                <option value="8500">6501 Sq. Ft. to 8500 Sq. Ft.</option>
-                <option value="10000">8501 Sq. Ft. to 10000 Sq. Ft.</option>
-                <option value="11500">10001 Sq. Ft. to 11500 Sq. Ft.</option>
-                <option value="14000">11501 Sq. Ft. to 14000 Sq. Ft.</option>
-                <option value="17500">14001 Sq. Ft. to 17500 Sq. Ft.</option>
-                <option value="19500">17501 Sq. Ft. to 19500 Sq. Ft.</option>
-                <option value="20000">More than 20000 Sq. Ft.</option>
+                <option value="1500">Less than 1,500 Sq. Ft.</option>
+                <option value="3000" selected>
+                  1,501 Sq. Ft. to 3,000 Sq. Ft.
+                </option>
+                <option value="4000">3,001 Sq. Ft. to 4,000 Sq. Ft.</option>
+                <option value="5000">4,001 Sq. Ft. to 5,000 Sq. Ft.</option>
+                <option value="6500">5,001 Sq. Ft. to 6,500 Sq. Ft.</option>
+                <option value="8500">6,501 Sq. Ft. to 8,500 Sq. Ft.</option>
+                <option value="10000">8,501 Sq. Ft. to 10,000 Sq. Ft.</option>
+                <option value="11500">10,001 Sq. Ft. to 11,500 Sq. Ft.</option>
+                <option value="14000">11,501 Sq. Ft. to 14,000 Sq. Ft.</option>
+                <option value="17500">14,001 Sq. Ft. to 17,500 Sq. Ft.</option>
+                <option value="19500">17,501 Sq. Ft. to 19,500 Sq. Ft.</option>
               </Input>
 
               <Label for="propertySize">Estimated Property Size</Label>
@@ -220,25 +219,26 @@ class Pricing extends Component<IPricingProps, IPricingState> {
                   this.inputChangedHandler(event, "propertySize")
                 }
               >
-                <option value="1500">Less than 1500 Sq. Ft.</option>
-                <option value="2000">1501 Sq. Ft. to 2000 Sq. Ft.</option>
-                <option value="2500">2001 Sq. Ft. to 2500 Sq. Ft.</option>
-                <option value="3000">2501 Sq. Ft. to 3000 Sq. Ft.</option>
-                <option value="3500">3001 Sq. Ft. to 3500 Sq. Ft.</option>
-                <option value="4000">3501 Sq. Ft. to 4000 Sq. Ft.</option>
-                <option value="4500">4001 Sq. Ft. to 4500 Sq. Ft.</option>
-                <option value="5000">4501 Sq. Ft. to 5000 Sq. Ft.</option>
-                <option value="5500">5001 Sq. Ft. to 5500 Sq. Ft.</option>
-                <option value="6000">5501 Sq. Ft. to 6000 Sq. Ft.</option>
-                <option value="6500">6001 Sq. Ft. to 6500 Sq. Ft.</option>
-                <option value="7600">6501 Sq. Ft. to 7500 Sq. Ft.</option>
-                <option value="8500">7501 Sq. Ft. to 8500 Sq. Ft.</option>
-                <option value="10000">8501 Sq. Ft. to 10000 Sq. Ft.</option>
-                <option value="12000">10001 Sq. Ft. to 12000 Sq. Ft.</option>
-                <option value="15000">12001 Sq. Ft. to 15000 Sq. Ft.</option>
-                <option value="17500">15001 Sq. Ft. to 17500 Sq. Ft.</option>
-                <option value="19500">17501 Sq. Ft. to 19500 Sq. Ft.</option>
-                <option value="20000">More than 20000 Sq. Ft.</option>
+                <option value="1500">Less than 1,500 Sq. Ft.</option>
+                <option value="2000">1,501 Sq. Ft. to 2,000 Sq. Ft.</option>
+                <option value="2500" selected>
+                  2,001 Sq. Ft. to 2,500 Sq. Ft.
+                </option>
+                <option value="3000">2,501 Sq. Ft. to 3,000 Sq. Ft.</option>
+                <option value="3500">3,001 Sq. Ft. to 3,500 Sq. Ft.</option>
+                <option value="4000">3,501 Sq. Ft. to 4,000 Sq. Ft.</option>
+                <option value="4500">4,001 Sq. Ft. to 4,500 Sq. Ft.</option>
+                <option value="5000">4,501 Sq. Ft. to 5,000 Sq. Ft.</option>
+                <option value="5500">5,001 Sq. Ft. to 5,500 Sq. Ft.</option>
+                <option value="6000">5,501 Sq. Ft. to 6,000 Sq. Ft.</option>
+                <option value="6500">6,001 Sq. Ft. to 6,500 Sq. Ft.</option>
+                <option value="7500">6,501 Sq. Ft. to 7,500 Sq. Ft.</option>
+                <option value="8500">7,501 Sq. Ft. to 8,500 Sq. Ft.</option>
+                <option value="10000">8,501 Sq. Ft. to 10,000 Sq. Ft.</option>
+                <option value="12000">10,001 Sq. Ft. to 12,000 Sq. Ft.</option>
+                <option value="15000">12,001 Sq. Ft. to 15,000 Sq. Ft.</option>
+                <option value="17500">15,001 Sq. Ft. to 17,500 Sq. Ft.</option>
+                <option value="19500">17,501 Sq. Ft. to 19,500 Sq. Ft.</option>
               </Input>
 
               <Label for="floors">Number of Floors</Label>

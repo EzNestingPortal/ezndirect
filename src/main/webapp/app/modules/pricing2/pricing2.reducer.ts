@@ -50,7 +50,7 @@ export default (state: PricingState = initialState, action): PricingState => {
       return {
         ...initialState,
         pricingFailure: true,
-        errorMessage: action.payload.response.data.errorKey
+        errorMessage: "Something went wrong, please try later"
       };
     case SUCCESS(ACTION_TYPES.GET_MY_PRICE):
       return {

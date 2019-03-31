@@ -20,7 +20,8 @@ public class StripeService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(StripeService.class);
 	
-	private static final String stripeSecretKey = "pk_test_QseBPReeIxUM1y6tvGHv3VYL";
+	//private static final String stripeSecretKey = "pk_test_QseBPReeIxUM1y6tvGHv3VYL";
+	private static final String stripeSecretKey = "pk_live_KSvXHLeXD1qJ1JO6AgqhqhsP";
 
 	@PostConstruct
 	private void init() {
@@ -36,7 +37,7 @@ public class StripeService {
 	public Customer createCustomer(StripeCustomer stripeCustomer) {
 		logger.debug("entering createCustomer ");
 
-		Stripe.apiKey = "sk_test_gl11HKrUumTX4NAmvoxeZsLL";
+		Stripe.apiKey = "sk_live_2AZaUESImjMpVV8dYuXSVb3V";
 
 		Map<String, Object> customerParams = new HashMap<String, Object>();
 

@@ -68,45 +68,71 @@ public class PricingService {
     
     static {
         basicMap = new HashMap<Integer, Float>();
-        basicMap.put(1500, 20f);
-        basicMap.put(3000, 25f);
-        basicMap.put(5000, 25f);
-        basicMap.put(6500, 30f);
-        basicMap.put(8500, 35f);
-        basicMap.put(10000, 40f);
-        basicMap.put(11000, 45f);
-        basicMap.put(14000, 60f);
-
-       /*  lawnMap = new HashMap<Integer, Float>();
-        lawnMap.put(1500, 10f);
-        lawnMap.put(3000, 15f);
-        lawnMap.put(5000, 15f);
-        lawnMap.put(6500, 20f);
-        lawnMap.put(8500, 25f);
-        lawnMap.put(10000, 30f);
-        lawnMap.put(11000, 30f);
-        lawnMap.put(14000, 35f); */
-
-        primeMap = new HashMap<Integer, Float>();
-        primeMap.put(1500, 20f);
-        primeMap.put(2500, 20f);
-        primeMap.put(3000, 20f);
-        primeMap.put(3500, 20f);
-        primeMap.put(4000, 25f);
-        primeMap.put(4500, 25f);
-        primeMap.put(5000, 30f);
-        primeMap.put(6000, 30f);
-
-        grandMap = new HashMap<Integer, Float>();
-        grandMap.put(1, 15f);
-        grandMap.put(2, 20f);
-        grandMap.put(3, 30f);
-
-        eliteMap = new HashMap<Integer, Float>();
-        eliteMap.put(1, 15f);
-        eliteMap.put(2, 20f);
-        eliteMap.put(3, 30f);
+        basicMap.put(1500, 25f);
+        basicMap.put(3000, 29f);
+        basicMap.put(4000, 29f);
+        basicMap.put(5000, 29f);
+        basicMap.put(6500, 39f);
+        basicMap.put(8500, 49f);
+        basicMap.put(10000, 49f);
+        basicMap.put(11500, 59f);
+        basicMap.put(14000, 69f);
+        basicMap.put(17500, 79f);
+        basicMap.put(19500, 89f);
         
+        primeMap = new HashMap<Integer, Float>();
+        primeMap.put(1500, 14f);
+        primeMap.put(3000, 20f);
+        primeMap.put(4000, 20f);
+        primeMap.put(5000, 30f);
+        primeMap.put(6500, 30f);
+        primeMap.put(8500, 30f);
+        primeMap.put(10000, 40f);
+        primeMap.put(11500, 50f);
+        primeMap.put(14000, 60f);
+        primeMap.put(17500, 70f);
+        primeMap.put(19500, 80f);
+        
+        grandMap = new HashMap<Integer, Float>();
+        grandMap.put(1500, 20f);
+        grandMap.put(2000, 20f);
+        grandMap.put(2500, 20f);
+        grandMap.put(3000, 20f);
+        grandMap.put(3500, 20f);
+        grandMap.put(4000, 30f);
+        grandMap.put(4500, 30f);
+        grandMap.put(5000, 30f);
+        grandMap.put(5500, 40f);
+        grandMap.put(6000, 40f);
+        grandMap.put(6500, 50f);
+        grandMap.put(7500, 50f);
+        grandMap.put(8500, 60f);
+        grandMap.put(10000, 60f);
+        grandMap.put(12000, 70f);
+        grandMap.put(15000, 80f);
+        grandMap.put(17500, 90f);
+        grandMap.put(19500, 100f);
+        
+        eliteMap = new HashMap<Integer, Float>();
+        eliteMap.put(1500, 30f);
+        eliteMap.put(2000, 30f);
+        eliteMap.put(2500, 30f);
+        eliteMap.put(3000, 30f);
+        eliteMap.put(3500, 30f);
+        eliteMap.put(4000, 40f);
+        eliteMap.put(4500, 40f);
+        eliteMap.put(5000, 40f);
+        eliteMap.put(5500, 40f);
+        eliteMap.put(6000, 50f);
+        eliteMap.put(6500, 50f);
+        eliteMap.put(7500, 50f);
+        eliteMap.put(8500, 60f);
+        eliteMap.put(10000, 60f);
+        eliteMap.put(12000, 60f);
+        eliteMap.put(15000, 60f);
+        eliteMap.put(17500, 60f);
+        eliteMap.put(19500, 60f);
+             
     }
 
     public List<SubscriptionDTO> getAvailablePlans(PropertyMetaDataDTO propertyMetaDataDTO){
@@ -367,8 +393,6 @@ public class PricingService {
 
         Float price =  basicMap.get(lawnSize);
         
-        
-
         subscriptionDTO = new SubscriptionDTO();
         subscriptionDTO.setSubscriptionId("1001");
         subscriptionDTO.setSubscriptionName(BASIC);
@@ -410,39 +434,11 @@ public class PricingService {
         serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(IWC), false));
         serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(GC), false));
 
-        
-        
-
         subscriptionDTO.setServices(serviceDTOList);
         subscriptionDTOList.add(subscriptionDTO);
+
+        price = price + primeMap.get(lawnSize);
         
-        /*
-        price = price + lawnMap.get(lawnSize);
-
-        subscriptionDTO=new SubscriptionDTO();
-        subscriptionDTO.setSubscriptionId("1002");
-        subscriptionDTO.setSubscriptionName(LAWN);
-        subscriptionDTO.setFrequency("bi-weekly");
-        subscriptionDTO.setIdleMonths("Dec and Jan");
-        subscriptionDTO.setYearlySavings(345.00);
-        subscriptionDTO.setPromoCode("NH");
-        subscriptionDTO.setDiscountedPrice(price);
-        subscriptionDTO.setOriginalAmount(60.00);
-        serviceDTOList = new ArrayList<AvailableServiceDTO>();
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(LMB), true));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(EGT), true));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(WE), true));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(LF), true));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(WC), true));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(PC), false));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(EWC), false));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(TCC), false));
-        serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(CC), false));
-        subscriptionDTO.setServices(serviceDTOList);
-        subscriptionDTOList.add(subscriptionDTO); */
-
-        price = price + primeMap.get(propertySize);
-
         subscriptionDTO=new SubscriptionDTO();
         subscriptionDTO.setSubscriptionId("1002");
         subscriptionDTO.setSubscriptionName(PRIME);
@@ -486,8 +482,8 @@ public class PricingService {
         subscriptionDTO.setServices(serviceDTOList);
         subscriptionDTOList.add(subscriptionDTO);
 
-        price = price + grandMap.get(floors);
-
+        price = price + grandMap.get(propertySize);
+                
         subscriptionDTO=new SubscriptionDTO();
         subscriptionDTO.setSubscriptionId("1003");
         subscriptionDTO.setSubscriptionName(GRAND);
@@ -527,13 +523,12 @@ public class PricingService {
         serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(CC), false));
         serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(IWC), false));
         serviceDTOList.add(new AvailableServiceDTO(serviceDTOMap.get(GC), false));
-
        
         subscriptionDTO.setServices(serviceDTOList);
         subscriptionDTOList.add(subscriptionDTO);
 
-        price = price + eliteMap.get(floors);
-
+        price = price + eliteMap.get(propertySize);
+             
         subscriptionDTO=new SubscriptionDTO();
         subscriptionDTO.setSubscriptionId("1004");
         subscriptionDTO.setSubscriptionName(ELITE);

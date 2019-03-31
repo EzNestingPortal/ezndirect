@@ -63,7 +63,7 @@ export const handleRegister = (
   }),
   meta: {
     successMessage:
-      "<strong>Registration saved!</strong> Please check your email for confirmation."
+      "Registration saved! Please check your email for confirmation."
   }
 });
 

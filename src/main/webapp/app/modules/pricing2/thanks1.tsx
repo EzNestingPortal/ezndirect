@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { StripeProvider } from "react-stripe-elements";
-import { Container, Row, Col } from "reactstrap";
 
 import ThanksCheckout from "app/modules/pricing2/ThanksCheckout1";
 

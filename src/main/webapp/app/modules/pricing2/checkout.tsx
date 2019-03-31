@@ -70,7 +70,7 @@ class Checkout extends Component<ICheckoutState> {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    let checkoutForm = Object.assign({}, this.state.checkoutForm); //creating copy of object
+    const checkoutForm = Object.assign({}, this.state.checkoutForm); //creating copy of object
     checkoutForm[inputIdentifier].value = event.target.value; //updating value
 
     this.setState({ checkoutForm });
@@ -78,7 +78,7 @@ class Checkout extends Component<ICheckoutState> {
 
   async handleSubmit(ev, values) {
     let isValid = true;
-    let forms = document.getElementsByClassName("needs-validation");
+    const forms = document.getElementsByClassName("needs-validation");
 
     let validation = Array.prototype.filter.call(forms, function(form) {
       if (form.checkValidity() === false) {
@@ -87,21 +87,21 @@ class Checkout extends Component<ICheckoutState> {
                 ev.stopPropagation(); */
       }
     });
-    let billingAddress = this.state.checkoutForm.address1.value;
-    let billingCity = this.state.checkoutForm.city.value;
-    let billingState = this.state.checkoutForm.state.value;
+    const billingAddress = this.state.checkoutForm.address1.value;
+    const billingCity = this.state.checkoutForm.city.value;
+    const billingState = this.state.checkoutForm.state.value;
 
     if (isValid) {
-      let name =
+      const name =
         localStorage.getItem("firstName") +
         " " +
         localStorage.getItem("lastName");
-      let emailId = localStorage.getItem("emailId");
+      const emailId = localStorage.getItem("emailId");
 
       // @ts-ignore
-      let { token } = await this.props.stripe.createToken({ name: name });
+      const { token } = await this.props.stripe.createToken({ name: name });
 
-      let formData = new FormData();
+      const formData = new FormData();
       formData.set("name", name);
       formData.set("email", emailId);
       formData.set("stripeToken", token.id);
@@ -115,16 +115,9 @@ class Checkout extends Component<ICheckoutState> {
       });
 
       if (response.ok) {
-        console.log("Purchase complete!");
-        //toast.success("Payment Complete!!!");
-
         this.showPaymentSuccess();
-        //alert("Payment Complete!!!");
       } else {
-        console.log("Purchase failed!");
-        //this.showPaymentSuccess();
         toast.error("Payment failed. Please try after some time");
-        //alert("Payment failed. Please try after some time");
       }
       ev.preventDefault();
     }

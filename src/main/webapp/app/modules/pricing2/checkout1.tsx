@@ -14,11 +14,9 @@ import {
   AvForm,
   AvInput,
   AvGroup,
-  AvField,
-  AvRadioGroup,
-  AvRadio
+  AvField
 } from "availity-reactstrap-validation";
-import { updateObject } from "app/shared/util/Utility";
+
 import "./checkout.scss";
 
 export interface ICheckoutState {
