@@ -108,7 +108,6 @@ public class Property implements Serializable {
     @Column(name = "service_start_date", length = 50)
     private Date serviceStartDate;
     
-    @NotNull
     @Column(name = "last_service_date", length = 50)
     private Date lastServiceDate;
     

@@ -96,7 +96,7 @@ class Checkout extends Component<ICheckoutState> {
         localStorage.getItem("firstName") +
         " " +
         localStorage.getItem("lastName");
-      const emailId = localStorage.getItem("emailId");
+      const emailId = localStorage.getItem("email");
 
       // @ts-ignore
       const { token } = await this.props.stripe.createToken({ name: name });
@@ -116,6 +116,8 @@ class Checkout extends Component<ICheckoutState> {
 
       if (response.ok) {
         this.showPaymentSuccess();
+      } else if (response.status == 409) {
+        toast.error("Credit Card information already saved!");
       } else {
         toast.error("Payment failed. Please try after some time");
       }

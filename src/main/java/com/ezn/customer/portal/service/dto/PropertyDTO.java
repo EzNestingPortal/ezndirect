@@ -76,7 +76,7 @@ public class PropertyDTO {
     	this.setDiscountPrice(property.getDiscountPrice());
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		this.setServiceStartDate(format.format(property.getServiceStartDate()));
-		this.setLastServiceDate(format.format(property.getLastServiceDate()));
+		//this.setLastServiceDate(format.format(property.getLastServiceDate()));
     	this.setReferralCode(property.getReferralCode());
     	this.setCornerLot(property.getCornerLot());
     	this.setNotes(property.getNotes());
@@ -479,7 +479,4 @@ public class PropertyDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	
-	
 }

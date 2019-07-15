@@ -58,6 +58,8 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
+    private String customerStripeId;
+
     private Set<String> authorities;
     
     private List<PropertyDTO> properties;
@@ -80,16 +82,17 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.customerStripeId = user.getCustomerStripeId();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
         
         List<Property> properties = user.getProperties();
-                
+              
         List<PropertyDTO> propertyDTOS = new ArrayList<PropertyDTO>(properties.size());
     	for (int i = 0; i < properties.size(); i++) {
     		BeanUtils.copyProperties(properties.get(i), propertyDTOS.get(i));
-    	}
+        }
         this.properties = propertyDTOS;
     }
 
@@ -197,6 +200,14 @@ public class UserDTO {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public String getCustomerStripeId() {
+        return customerStripeId;
+    }
+
+    public void setCustomerStripeId(String customerStripeId) {
+        this.customerStripeId = customerStripeId;
+    }
+    
     public Set<String> getAuthorities() {
         return authorities;
     }
@@ -213,6 +224,7 @@ public class UserDTO {
 		this.properties = properties;
 	}
 
+    
 	@Override
     public String toString() {
         return "UserDTO{" +

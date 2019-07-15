@@ -102,6 +102,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Column(name = "customer_stripe_id")
+    private String customerStripeId;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -214,6 +217,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.resetDate = resetDate;
     }
 
+    public String getCustomerStripeId() {
+        return customerStripeId;
+    }
+
+    public void setCustomerStripeId(String customerStripeId) {
+        this.customerStripeId = customerStripeId;
+    }
+        
     public String getLangKey() {
         return langKey;
     }

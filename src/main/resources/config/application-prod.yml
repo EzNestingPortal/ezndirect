@@ -15,9 +15,9 @@
 
 logging:
     level:
-        ROOT: DEBUG
-        com.ezn.customer.portal: DEBUG
-        io.github.jhipster: DEBUG
+        ROOT: INFO
+        com.ezn.customer.portal: INFO
+        io.github.jhipster: INFO
 
 eureka:
     

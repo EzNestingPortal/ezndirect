@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router";
 import { RouteComponentProps, Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 import {
   Container,
@@ -12,8 +16,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Input
 } from "reactstrap";
+
 import {
   AvForm,
   AvInput,
@@ -26,6 +32,23 @@ import {
 import "./enroll.scss";
 
 import { handleRegister, back } from "app/modules/pricing2/pricing2.reducer";
+
+const DateInput = ({ onChange, placeholder, name, value, onClick }) => (
+  <AvField
+    onChange={onChange}
+    placeholder={placeholder}
+    onClick={onClick}
+    value={value}
+    name={name}
+    readOnly={true}
+    validate={{
+      required: {
+        value: true,
+        errorMessage: "Preferred Service Date is required."
+      }
+    }}
+  />
+);
 
 export interface IPricingProps
   extends DispatchProps,
@@ -43,6 +66,7 @@ export interface IPricingState {
   modal1: boolean;
   modal2: boolean;
   modal3: boolean;
+  serviceStartDate: Date;
 }
 
 const now = new Date().toJSON().split("T")[0];
@@ -54,7 +78,8 @@ class Enroll extends Component<IPricingProps, IPricingState> {
     saveInDbSuccess: false,
     modal1: false,
     modal2: false,
-    modal3: false
+    modal3: false,
+    serviceStartDate: null
   };
 
   constructor(props) {
@@ -63,6 +88,8 @@ class Enroll extends Component<IPricingProps, IPricingState> {
     this.toggle1 = this.toggle1.bind(this);
     this.toggle2 = this.toggle2.bind(this);
     this.toggle3 = this.toggle3.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleChangeRaw = this.handleChangeRaw.bind(this);
   }
 
   toggle1() {
@@ -83,6 +110,20 @@ class Enroll extends Component<IPricingProps, IPricingState> {
     });
   }
 
+  handleDateChange(date) {
+    this.setState({
+      serviceStartDate: date
+    });
+  }
+
+  handleChangeRaw(event) {
+    const m = moment(event.target.value);
+
+    if (m.isValid()) {
+      this.handleDateChange(event.target.value);
+    }
+  }
+
   handleValidSubmit = (event, values) => {
     const headers = {
       "Content-Type": "application/json",
@@ -92,7 +133,6 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       Token: "f61ab5c0-77b4-4115-8e5a-0607c856baa6",
       "api-key": "EZN"
     };
-
     this.props.handleRegister(values, headers);
     event.preventDefault();
   };
@@ -113,7 +153,7 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       return <Redirect to="/register" />;
     }
 
-    let form = (
+    const form = (
       <Container className="formContainer">
         <Row className="justify-content-center">
           <Col md="8">
@@ -347,41 +387,51 @@ class Enroll extends Component<IPricingProps, IPricingState> {
               <Row>
                 <Col xs="12" sm="6">
                   <AvField
-                    name="properties[0].lastServiceDate"
-                    id="lastServiceDate"
-                    type="date"
-                    onFocus="this.type=date"
-                    onBlur="this.type=text"
-                    onchange="this.className=(this.value!=''?'has-value':'')"
-                    placeholder="Last Lawn Mow Date"
-                    max={now}
+                    type="select"
+                    name="properties[0].param1"
                     validate={{
                       required: {
                         value: true,
-                        errorMessage: "Last Lawn Mow Date is required."
-                      },
-                      date: { format: "MM-DD-YYYY" }
+                        errorMessage: "Current Grass length is required"
+                      }
                     }}
-                  />
+                  >
+                    <option value="">
+                      Choose Current Grass Length at your property
+                    </option>
+                    <option value="3">3 inches or less</option>
+                    <option value="4">4 inches or less</option>
+                    <option value="5">5 inches or less</option>
+                    <option value="6">6 inches or less</option>
+                    <option value="9">9 inches or less</option>
+                    <option value="12">12 inches or less</option>
+                    <option value="15">15 inches or less</option>
+                    <option value="18">18 inches or less</option>
+                    <option value="24">24 inches or more</option>
+                  </AvField>
                 </Col>
 
                 <Col xs="12" sm="6">
-                  <AvField
+                  <DatePicker
                     name="properties[0].serviceStartDate"
                     id="serviceStartDate"
-                    type="date"
-                    onfocus="(this.type='date')"
-                    onblur="(this.type='text')"
-                    placeholder="Preferred Service Start Date"
-                    min={now}
-                    validate={{
-                      required: {
-                        value: true,
-                        errorMessage:
-                          "Preferred Service Start Date is required."
-                      },
-                      date: { format: "MM-DD-YYYY" }
-                    }}
+                    selected={this.state.serviceStartDate}
+                    onChange={this.handleDateChange}
+                    dateFormat="MM/dd/yyyy"
+                    minDate={new Date()}
+                    placeholderText="Preferred Service Date"
+                    onChangeRaw={event => this.handleChangeRaw(event)}
+                    required={true}
+                    customInput={
+                      <DateInput
+                        onChange={this.handleDateChange}
+                        placeholder="Preferred Service Date"
+                        name="properties[0].serviceStartDate"
+                        value={this.state.serviceStartDate}
+                        onClick={onclick}
+                      />
+                    }
+                    className="form-control"
                   />
                 </Col>
               </Row>
@@ -449,6 +499,12 @@ class Enroll extends Component<IPricingProps, IPricingState> {
                     id="country"
                     value="US"
                   />
+                  {/* <AvInput
+                    type="hidden"
+                    name="properties[0].serviceStartDate"
+                    id="serviceStartDate"
+                    value={this.state.serviceStartDate==null?'':this.state.serviceStartDate.toJSON().split("T")[0]}
+                  /> */}
                 </Col>
               </Row>
               <Row>
@@ -526,21 +582,6 @@ class Enroll extends Component<IPricingProps, IPricingState> {
                   </AvGroup>
                 </Col>
               </Row>
-              {/* <Row>
-                    <Col xs="12" sm="12">
-                    <Link to="#" onClick={this.toggle1} className="link">Terms of Service</Link>  
-                    </Col>    
-                </Row>
-                <Row>
-                    <Col xs="12" sm="12">
-                    <Link to="#" onClick={this.toggle2} className="link">Service Property Details Provided ACCURATELY</Link>
-                    </Col>    
-                </Row>
-                <Row>
-                    <Col xs="12" sm="12">
-                    <Link to="#" onClick={this.toggle3} className="link">First Service, Corner Lot and Long Grass Policy</Link>
-                    </Col>    
-                </Row> */}
               <Row>
                 <Col xs="12" sm="12">
                   <div className="buttonpanel">
@@ -563,7 +604,7 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       </Container>
     );
 
-    let tcText = (
+    const tcText = (
       <>
         <p>Terms and Conditions:</p>
         <p>Last Updated August 2018 </p>
@@ -1084,7 +1125,7 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       </>
     );
 
-    let spText = (
+    const spText = (
       <>
         <p>
           I confirm that I’ve provided service property details accurately
@@ -1096,7 +1137,7 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       </>
     );
 
-    let lgText = (
+    const lgText = (
       <>
         <p>Long Grass Policy:</p>
         <p>
@@ -1137,14 +1178,14 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       </>
     );
 
-    let tcModal = (
+    const tcModal = (
       <Modal isOpen={this.state.modal1} toggle={this.toggle1}>
         <ModalHeader toggle={this.toggle1}>Terms & Conditions</ModalHeader>
         <ModalBody>{tcText}</ModalBody>
       </Modal>
     );
 
-    let spModal = (
+    const spModal = (
       <Modal isOpen={this.state.modal2} toggle={this.toggle2}>
         <ModalHeader toggle={this.toggle2}>
           Service Property Details Provided ACCURATELY
@@ -1153,7 +1194,7 @@ class Enroll extends Component<IPricingProps, IPricingState> {
       </Modal>
     );
 
-    let lgModal = (
+    const lgModal = (
       <Modal isOpen={this.state.modal3} toggle={this.toggle3}>
         <ModalHeader toggle={this.toggle3}>
           First Service, Corner Lot and Long Grass Policy

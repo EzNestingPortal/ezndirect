@@ -20,18 +20,13 @@ import Pricing2 from "app/modules/pricing2/pricing2";
 import Enroll from "app/modules/pricing2/enroll";
 import Enroll1 from "app/modules/pricing2/enroll1";
 import Thanks from "app/modules/pricing2/thanks";
-import Thanks1 from "app/modules/pricing2/thanks1"; //"app/modules/account"), //"app/modules/administration"),
+import Thanks1 from "app/modules/pricing2/thanks1"; /*}); */ //"app/modules/account"), //"app/modules/administration"), //loading: () => <div>loading ...</div> //loading: () => <div>loading ...</div> //}); */
 
 // tslint:disable:space-in-parens
 /* const Account = Loadable({
-  loader: () => import(/* webpackChunkName: "account" */ //loading: () => <div>loading ...</div>
-/*}); */
-
-/*const Admin = Loadable({
+  loader: () => import(/* webpackChunkName: "account" */ /*const Admin = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "administration" */ //loading: () => <div>loading ...</div>
-//}); */
-// tslint:enable
+    import(/* webpackChunkName: "administration" */ // tslint:enable
 
 const Routes = () => (
   <div className="view-routes">
@@ -42,9 +37,9 @@ const Routes = () => (
       {/*<ErrorBoundaryRoute path="/pricing" component={Pricing} /> */}
       <ErrorBoundaryRoute path="/pricing2" component={Pricing2} />
       <ErrorBoundaryRoute path="/enroll" component={Enroll} />
-      <ErrorBoundaryRoute path="/onetime/:key?" component={Enroll1} />
+      {/* <ErrorBoundaryRoute path="/onetime/:key?" component={Enroll1} /> */}
       <ErrorBoundaryRoute path="/thank-you" component={Thanks} />
-      <ErrorBoundaryRoute path="/thank-you1" component={Thanks1} />
+      {/* <ErrorBoundaryRoute path="/thank-you1" component={Thanks1} /> */}
       {/* <PrivateRoute
         path="/enroll"
         component={Enroll}
