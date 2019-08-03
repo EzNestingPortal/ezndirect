@@ -15,7 +15,7 @@ class Thanks extends Component<IEnrollProps> {
   }
   render() {
     return (
-      <StripeProvider apiKey="pk_live_KSvXHLeXD1qJ1JO6AgqhqhsP">
+      <StripeProvider apiKey="pk_test_QseBPReeIxUM1y6tvGHv3VYL">
         <ThanksCheckout />
       </StripeProvider>
     );

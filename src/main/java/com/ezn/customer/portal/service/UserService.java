@@ -105,7 +105,7 @@ public class UserService {
     public User registerUser(UserDTO userDTO, String password)   {
 
         User newUser = new User();
-        String encryptedPassword = passwordEncoder.encode(password);
+        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         newUser.setLogin(userDTO.getLogin());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);

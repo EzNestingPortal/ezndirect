@@ -117,7 +117,7 @@ class Checkout extends Component<ICheckoutState> {
       if (response.ok) {
         this.showPaymentSuccess();
       } else if (response.status == 409) {
-        toast.error("Credit Card information already saved!");
+        toast.error("We have already added your card to your account!");
       } else {
         toast.error("Payment failed. Please try after some time");
       }

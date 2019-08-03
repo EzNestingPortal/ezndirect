@@ -1,7 +1,9 @@
 package com.ezn.customer.portal.web.rest;
 
 import com.ezn.customer.portal.service.StripeService;
+import com.ezn.customer.portal.service.UserService;
 import com.ezn.customer.portal.service.dto.StripeCustomer;
+import com.ezn.customer.portal.service.dto.UserDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,10 @@ public class StripeResource {
 	
 	@Autowired
 	private StripeService stripeSvcAdapter;
-
+	
+	@Autowired
+	private UserService userService;
+	
 	
 	@PostMapping("/create")
 	public ResponseEntity<StripeCustomer> createCustomer(@RequestParam String name, @RequestParam String email, @RequestParam String stripeToken, 
@@ -36,9 +41,15 @@ public class StripeResource {
 		customer.setAddressLine1(addressLine1);
 		customer.setCity(city);
 		customer.setState(state);
-			
+
+		
+		
 		com.stripe.model.Customer stripeCustomer = stripeSvcAdapter.createCustomer(customer);
 		if (null != stripeCustomer) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setEmail(email);
+			userDTO.setCustomerStripeId(stripeCustomer.getId()	);
+			userService.updateCustomerStripeIdForUser(userDTO);
 			return ResponseEntity.ok().build();
 		} else {
 			return ResponseEntity.status(500).build();
