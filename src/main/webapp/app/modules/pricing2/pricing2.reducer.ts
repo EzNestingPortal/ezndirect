@@ -1,19 +1,15 @@
-import axios from "axios";
-import { Storage } from "react-jhipster";
+import axios from 'axios';
+import { Storage } from 'react-jhipster';
 
-import {
-  REQUEST,
-  SUCCESS,
-  FAILURE
-} from "app/shared/reducers/action-type.util";
+import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 export const ACTION_TYPES = {
-  GET_MY_PRICE: "pricing/GET_MY_PRICE",
-  RESET: "pricing/RESET",
-  CREATE_ACCOUNT_IN_DB: "save/CREATE_ACCOUNT_IN_DB",
-  CREATE_ACCOUNT_IN_RAZORSYNC: "enroll/CREATE_ACCOUNT_IN_RAZORSYNC",
-  LOGIN: "authentication/LOGIN",
-  GET_SESSION: "authentication/GET_SESSION"
+  GET_MY_PRICE: 'pricing/GET_MY_PRICE',
+  RESET: 'pricing/RESET',
+  CREATE_ACCOUNT_IN_DB: 'save/CREATE_ACCOUNT_IN_DB',
+  CREATE_ACCOUNT_IN_RAZORSYNC: 'enroll/CREATE_ACCOUNT_IN_RAZORSYNC',
+  LOGIN: 'authentication/LOGIN',
+  GET_SESSION: 'authentication/GET_SESSION'
 };
 
 const initialState = {
@@ -34,7 +30,7 @@ const initialState = {
   name1: null
 };
 
-const AUTH_TOKEN_KEY = "jhi-authenticationToken";
+const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
 
 export type PricingState = Readonly<typeof initialState>;
 
@@ -50,7 +46,7 @@ export default (state: PricingState = initialState, action): PricingState => {
       return {
         ...initialState,
         pricingFailure: true,
-        errorMessage: "Something went wrong, please try later"
+        errorMessage: 'Something went wrong, please try later'
       };
     case SUCCESS(ACTION_TYPES.GET_MY_PRICE):
       return {
@@ -106,7 +102,7 @@ export default (state: PricingState = initialState, action): PricingState => {
 // Actions
 export const handleGetMyPrice = (lawnSize, propertySize, floors) => ({
   type: ACTION_TYPES.GET_MY_PRICE,
-  payload: axios.get("/api/pricing", {
+  payload: axios.get('/api/pricing', {
     params: {
       lawnSize: lawnSize,
       propertySize: propertySize,
@@ -123,35 +119,29 @@ export const back = () => ({
   type: ACTION_TYPES.RESET
 });
 
-export const handleRegister = (user, headers) => async (
-  dispatchEvent,
-  getState
-) => {
+export const handleRegister = (user, headers) => async (dispatchEvent, getState) => {
   const registerResult = await dispatchEvent({
     type: ACTION_TYPES.CREATE_ACCOUNT_IN_DB,
-    payload: axios.post("/api/register", user)
+    payload: axios.post('/api/register', user)
   });
 
-  const enrollResult = await dispatchEvent({
+  /* const enrollResult = await dispatchEvent({
     type: ACTION_TYPES.CREATE_ACCOUNT_IN_RAZORSYNC,
     payload: axios.post("/api/enroll", user),
     meta: {
       errorMessage:
         "An error occurred while enrolling you, Please try after sometime."
-    }
-  });
+    } 
+  }); */
 };
 
-export const login = (username, password, rememberMe = false) => async (
-  dispatch,
-  getState
-) => {
+export const login = (username, password, rememberMe = false) => async (dispatch, getState) => {
   const result = await dispatch({
     type: ACTION_TYPES.LOGIN,
-    payload: axios.post("/api/authenticate", { username, password, rememberMe })
+    payload: axios.post('/api/authenticate', { username, password, rememberMe })
   });
   const bearerToken = result.value.headers.authorization;
-  if (bearerToken && bearerToken.slice(0, 7) === "Bearer ") {
+  if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
     const jwt = bearerToken.slice(7, bearerToken.length);
     if (rememberMe) {
       Storage.local.set(AUTH_TOKEN_KEY, jwt);
@@ -164,5 +154,5 @@ export const login = (username, password, rememberMe = false) => async (
 
 export const getSession = () => ({
   type: ACTION_TYPES.GET_SESSION,
-  payload: axios.get("/api/account")
+  payload: axios.get('/api/account')
 });
